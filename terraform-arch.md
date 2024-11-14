@@ -1,3 +1,4 @@
+```mermaid
 graph TB
     subgraph "Terraform Core"
         CLI[Terraform CLI]
@@ -80,3 +81,4 @@ graph TB
     class CLI,Parser,State,Graph,Eval,Plan,Apply core
     class Local,Remote,S3,Azure_Storage,GCS,Consul,Others_Backend storage
     class HCL,Vars,Module config
+```
