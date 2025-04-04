@@ -112,9 +112,17 @@ UI architecture patterns and state management visualizations.
 
 Learn how to create effective architecture diagrams and apply them to your projects:
 
-- [**Getting Started with Mermaid**](tutorials/getting-started/) - Learn the basics of creating architecture diagrams with Mermaid syntax
-- **Best Practices** - Guidelines for creating clear, informative architecture diagrams
-- **Case Studies** - Real-world examples showing how these diagrams help in system design
+### Getting Started
+- [**Getting Started with Mermaid**](tutorials/getting-started/mermaid-basics.md) - Learn the basics of creating architecture diagrams with Mermaid syntax
+
+### Concepts & Protocols
+- [**Model Context Protocol**](tutorials/concepts/model-context-protocol.md) - Understanding why a specialized protocol for AI model interactions is needed despite existing REST APIs
+
+### Best Practices
+- **Guidelines for creating clear, informative architecture diagrams** (Coming Soon)
+
+### Case Studies
+- **Real-world examples showing how these diagrams help in system design** (Coming Soon)
 
 ## 💡 Why AI-Generated Architecture?
 
