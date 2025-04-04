@@ -58,10 +58,39 @@ Thank you for your interest in contributing to this repository! We welcome contr
 
 If you'd like to contribute a tutorial:
 
-1. Place it in the appropriate subdirectory under `tutorials/`
-2. Ensure it includes clear step-by-step instructions
-3. Include example code/diagrams where applicable
-4. Follow the same Markdown format as the diagrams
+1. Choose the appropriate category:
+   - `tutorials/getting-started/` - Introductory tutorials for beginners
+   - `tutorials/concepts/` - Deeper explanations of architectural concepts and protocols
+   - `tutorials/best-practices/` - Guidelines and recommendations
+
+2. Format your tutorial:
+   - Use Markdown (`.md` extension)
+   - Follow the naming convention: `descriptive-name.md`
+   - Include clear step-by-step instructions
+   - Add example code/diagrams where applicable
+   - Follow the same Markdown format as the diagrams
+
+3. Suggested tutorial structure:
+   ```markdown
+   # Title of Your Tutorial
+
+   Brief introduction and overview of what will be covered.
+
+   ## Why This Matters
+   Explanation of the importance/relevance of this topic
+
+   ## Key Concepts
+   Explanation of main ideas/principles
+
+   ## Practical Examples
+   Code samples, diagrams, or examples
+
+   ## Best Practices
+   Recommendations and guidelines
+
+   ## Next Steps
+   Further learning resources or related topics
+   ```
 
 ## Style Guidelines
 
