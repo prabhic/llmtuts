@@ -12,7 +12,7 @@ This diagram illustrates the architecture and workflow of a modern frontend appl
 ## Architecture Diagram
 
 ```mermaid
-flowchart TD
+flowchart TB
     %% Top Level Node
     Browser[Browser/Client]
     
@@ -21,167 +21,168 @@ flowchart TD
         direction TB
         
         subgraph Pages["Pages Layer"]
-            AppComp["_app.js/tsx\n(Global Layout)"]
-            DocComp["_document.js/tsx\n(HTML Structure)"]
-            IndexPage["index.js/tsx\n(Home Page)"]
-            DynamicPages["[dynamic].js/tsx\n(Dynamic Routes)"]
+            direction LR
+            AppComp["_app.js\n(Global Layout)"]
+            DocComp["_document.js\n(HTML Structure)"]
+            IndexPage["index.js\n(Home Page)"]
+            DynamicPages["[dynamic].js\n(Dynamic Routes)"]
             APIRoutes["API Routes\n(/api/*)"]
         end
         
         subgraph Components["Component Layer"]
             direction LR
-            Layout["Layout Components"]
-            UI["UI Components"]
-            Forms["Form Components"]
+            Layout["Layout\nComponents"]
+            UI["UI\nComponents"]
+            Forms["Form\nComponents"]
         end
         
         subgraph Styling["Styling System"]
-            direction TB
+            direction LR
             TailwindCSS["Tailwind CSS"]
+            
             subgraph TailwindConfig["Tailwind Configuration"]
-                Theme["Theme\n(Colors, Spacing, etc.)"]
-                Plugins["Plugins\n(Forms, Typography, etc.)"]
-                CustomUtils["Custom Utilities"]
+                direction TB
+                Theme["Theme\n(Colors, Spacing)"]
+                Plugins["Plugins\n(Forms, Typography)"]
+                CustomUtils["Custom\nUtilities"]
             end
-            PostCSS["PostCSS Processing"]
+            
+            PostCSS["PostCSS\nProcessing"]
             GlobalCSS["global.css"]
         end
         
         subgraph Data["Data Management"]
-            SWR["SWR/React Query\n(Client Data Fetching)"]
-            ServerProps["getServerSideProps\n(Server-side Data)"]
+            direction LR
+            SWR["SWR/React Query\n(Client Fetching)"]
+            ServerProps["getServerSideProps\n(Server Data)"]
             StaticProps["getStaticProps\n(Build-time Data)"]
         end
     end
     
-    %% Build System
+    %% Build System - Simplified for better display
     subgraph BuildSystem["Build System"]
-        direction TB
-        Next["Next.js Compiler"]
-        Bundler["Webpack/Turbopack"]
-        TailwindJIT["Tailwind JIT Compiler"]
-        OptimizeCSS["CSS Optimization"]
-        ImageOpt["Image Optimization"]
+        direction LR
+        Next["Next.js\nCompiler"]
+        Bundler["Webpack/\nTurbopack"]
+        TailwindJIT["Tailwind JIT\nCompiler"]
+        OptimizeCSS["CSS\nOptimization"]
     end
     
-    %% Deployment
+    %% Deployment - Simplified for better display
     subgraph Deployment["Deployment"]
         direction LR
         Vercel["Vercel"]
         Netlify["Netlify"]
-        Server["Custom Server"]
-        Static["Static Export"]
+        Server["Custom\nServer"]
+        Static["Static\nExport"]
     end
     
-    %% Connections between components
+    %% Key connections only (simplified for readability)
     AppComp --> Layout
     Layout --> UI
     Layout --> Forms
     
-    %% Styling connections
     TailwindCSS <--> TailwindConfig
     TailwindCSS --> PostCSS
-    GlobalCSS --> PostCSS
     TailwindCSS --> Components
     
-    %% Data flow
     SWR <--> APIRoutes
     ServerProps --> Pages
     StaticProps --> Pages
-    APIRoutes --> SWR
     
-    %% Build connections
     Application --> BuildSystem
-    TailwindCSS --> TailwindJIT
-    TailwindJIT --> OptimizeCSS
-    
-    %% Deployment connections
     BuildSystem --> Deployment
     Deployment --> Browser
     Browser --> Application
     
-    %% Styling for nodes
-    classDef page fill:#4F46E5,stroke:#4338CA,color:white,stroke-width:2px
-    classDef component fill:#8B5CF6,stroke:#7C3AED,color:white,stroke-width:2px
-    classDef styling fill:#EC4899,stroke:#DB2777,color:white,stroke-width:2px
-    classDef data fill:#10B981,stroke:#059669,color:white,stroke-width:2px
-    classDef build fill:#F59E0B,stroke:#D97706,color:white,stroke-width:2px
-    classDef deploy fill:#6366F1,stroke:#4F46E5,color:white,stroke-width:2px
-    classDef browser fill:#3B82F6,stroke:#2563EB,color:white,stroke-width:2px
+    %% Styling for nodes - brighter colors for better contrast
+    classDef page fill:#4C1D95,stroke:#6D28D9,color:white,stroke-width:2px
+    classDef component fill:#6D28D9,stroke:#8B5CF6,color:white,stroke-width:2px
+    classDef styling fill:#BE185D,stroke:#DB2777,color:white,stroke-width:2px
+    classDef data fill:#047857,stroke:#10B981,color:white,stroke-width:2px
+    classDef build fill:#B45309,stroke:#F59E0B,color:white,stroke-width:2px
+    classDef deploy fill:#1E40AF,stroke:#3B82F6,color:white,stroke-width:2px
+    classDef browser fill:#1E40AF,stroke:#3B82F6,color:white,stroke-width:2px
     
     %% Apply styles
-    class AppComp,DocComp,IndexPage,DynamicPages,APIRoutes,Pages page
-    class Layout,UI,Forms,Components component
-    class TailwindCSS,TailwindConfig,Theme,Plugins,CustomUtils,PostCSS,GlobalCSS,Styling styling
-    class SWR,ServerProps,StaticProps,Data data
-    class Next,Bundler,TailwindJIT,OptimizeCSS,ImageOpt,BuildSystem build
-    class Vercel,Netlify,Server,Static,Deployment deploy
+    class AppComp,DocComp,IndexPage,DynamicPages,APIRoutes page
+    class Layout,UI,Forms component
+    class TailwindCSS,TailwindConfig,Theme,Plugins,CustomUtils,PostCSS,GlobalCSS styling
+    class SWR,ServerProps,StaticProps data
+    class Next,Bundler,TailwindJIT,OptimizeCSS build
+    class Vercel,Netlify,Server,Static deploy
     class Browser browser
 ```
 
 ## Key Components
 
 ### Next.js Framework Elements
-- **Pages Layer**: Contains route-based components and API routes
-  - `_app.js/tsx`: Wraps all pages, manages global state and layouts
-  - `_document.js/tsx`: Customizes the HTML structure
-  - Index and dynamic pages: Represent application routes
-  - API Routes: Serverless functions for backend operations
 
-- **Component Layer**: Reusable UI components
-  - Layout Components: Structural elements (header, footer, layout)
-  - UI Components: Buttons, cards, modals, etc.
-  - Form Components: Input elements with validation
-
-- **Data Management**:
-  - SWR/React Query: Client-side data fetching with caching
-  - `getServerSideProps`: Server-side rendering with fresh data
-  - `getStaticProps`: Static site generation with build-time data
+| Component | Description |
+|-----------|-------------|
+| **Pages Layer** | Route-based components and API endpoints |
+| `_app.js` | Wraps all pages, manages global state and layouts |
+| `_document.js` | Customizes the HTML document structure |
+| `index.js` & Dynamic Routes | Application pages and parameterized routes |
+| API Routes | Serverless functions for backend operations |
+| **Component Layer** | Reusable UI building blocks |
+| Layout Components | Page structure (header, footer, navigation) |
+| UI Components | Interface elements (buttons, cards, modals) |
+| Form Components | Input elements with validation logic |
+| **Data Management** | Multiple data fetching strategies |
+| Client-side Fetching | SWR/React Query with caching and revalidation |
+| Server-side Rendering | Fresh data on each request via `getServerSideProps` |
+| Static Generation | Build-time data fetching via `getStaticProps` |
 
 ### Tailwind CSS Integration
-- **Tailwind CSS**: Utility-first CSS framework
-- **Configuration**:
-  - Theme customization: Colors, spacing, typography, etc.
-  - Plugins: Additional utilities and components
-  - Custom utilities: Extended functionality
-- **Processing**:
-  - PostCSS: Processes and optimizes CSS
-  - Global CSS: Custom styles and Tailwind imports
+
+| Component | Description |
+|-----------|-------------|
+| **Core** | Utility-first CSS framework |
+| **Configuration** | Customization through `tailwind.config.js` |
+| Theme | Colors, spacing, typography, breakpoints |
+| Plugins | Additional utilities (forms, typography, etc.) |
+| Custom Utilities | Extended functionality for project-specific needs |
+| **Processing** | Compilation and optimization pipeline |
+| PostCSS | Processes and transforms CSS |
+| JIT Mode | Just-in-time generation of utility classes |
 
 ### Build & Deployment
-- **Build System**:
-  - Next.js compiler: Transforms and optimizes React code
-  - Bundler: Packages code for production
-  - Tailwind JIT: Just-in-time compilation of CSS utilities
-  - Optimizations: CSS and image processing
-- **Deployment Options**:
-  - Vercel: Optimized for Next.js
-  - Netlify: General JAMstack hosting
-  - Custom server: Self-hosted Node.js
-  - Static export: Pure HTML/CSS/JS output
+
+| Component | Description |
+|-----------|-------------|
+| **Build System** | Code compilation and optimization |
+| Next.js Compiler | Transforms and optimizes React code |
+| Bundler | Packages application for production |
+| CSS Optimization | Removes unused styles, minifies CSS |
+| **Deployment Options** | Various hosting strategies |
+| Vercel | Platform optimized for Next.js applications |
+| Netlify | General JAMstack hosting platform |
+| Custom Server | Self-hosted Node.js deployment |
+| Static Export | Pure HTML/CSS/JS output for any host |
 
 ## Implementation Benefits
 
 ### Developer Experience
-- **Component-Driven Development**: Build UIs with composable components
+- **Component-Driven Development**: Build UIs with composable, reusable components
 - **Rapid Styling**: Apply styles directly in markup without context switching
-- **Hot Reload**: Instant feedback during development
-- **TypeScript Support**: Type safety throughout the application
+- **Hot Reload**: Instant feedback during development process
+- **TypeScript Support**: End-to-end type safety throughout the application
 
 ### Performance
-- **Server-Side Rendering**: Improved initial load time and SEO
+- **Server-Side Rendering**: Improved initial load time and SEO performance
 - **Automatic Code Splitting**: Only load JavaScript needed for each page
-- **CSS Optimization**: Only include CSS utilities that are used
-- **Image Optimization**: Automatic resizing and format conversion
+- **CSS Optimization**: Include only CSS utilities that are actually used
+- **Image Optimization**: Automatic resizing, format conversion, and lazy loading
 
 ### Scalability
 - **API Routes**: Backend functionality without separate services
-- **Incremental Static Regeneration**: Update static content without rebuilds
-- **Middleware**: Process requests before rendering
-- **Next.js Edge Functions**: Run code at the edge for improved performance
+- **Incremental Static Regeneration**: Update static content without full rebuilds
+- **Middleware**: Process requests before rendering begins
+- **Edge Functions**: Run code at the edge for improved performance
 
 ## Related Architectures
-- React SPA with CSS-in-JS
+- React SPA with CSS-in-JS (styled-components, emotion)
 - Astro with Tailwind CSS
 - Vue.js with Nuxt and Tailwind CSS
 - Remix with Tailwind CSS
