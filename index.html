@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Tutorials | Learning Large Language Models</title>
+    <style>
+        :root {
+            --primary-color: #4a6baf;
+            --secondary-color: #f8f9fa;
+            --accent-color: #5d93ff;
+            --text-color: #333;
+            --light-text: #666;
+            --card-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #fff;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+        
+        .site-intro {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .site-intro h2 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .site-intro p {
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+            color: var(--light-text);
+        }
+        
+        .categories {
+            margin-bottom: 2rem;
+        }
+        
+        .categories h3 {
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--secondary-color);
+            color: var(--primary-color);
+        }
+        
+        .tutorial-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card-img {
+            height: 160px;
+            background-color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--primary-color);
+        }
+        
+        .card-content {
+            padding: 1.5rem;
+        }
+        
+        .card-content h4 {
+            margin-bottom: 0.75rem;
+            color: var(--primary-color);
+        }
+        
+        .card-content p {
+            margin-bottom: 1.5rem;
+            color: var(--light-text);
+            font-size: 0.95rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-color);
+        }
+        
+        footer {
+            background-color: var(--secondary-color);
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-top: 2rem;
+            color: var(--light-text);
+        }
+        
+        @media (max-width: 768px) {
+            .tutorial-cards {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>LLM Tutorials</h1>
+    </header>
+    
+    <main class="container">
+        <section class="site-intro">
+            <h2>Learn About Large Language Models</h2>
+            <p>Welcome to LLM Tutorials - your resource for understanding concepts and implementations 
+            of Large Language Models. Explore our growing collection of tutorials, interactive examples, 
+            and architectural concepts.</p>
+        </section>
+        
+        <section class="categories">
+            <h3>Concepts</h3>
+            <div class="tutorial-cards">
+                <div class="card">
+                    <div class="card-img">📝</div>
+                    <div class="card-content">
+                        <h4>Model Context Protocol</h4>
+                        <p>Learn why specialized protocols for LLM communication are needed and how they work.</p>
+                        <a href="tutorials/concepts/model-context-protocol.html" class="btn">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="categories">
+            <h3>Interactive Explanations</h3>
+            <div class="tutorial-cards">
+                <div class="card">
+                    <div class="card-img">🔄</div>
+                    <div class="card-content">
+                        <h4>Model Context Protocol</h4>
+                        <p>An interactive visual explanation of the Model Context Protocol with code examples.</p>
+                        <a href="tutorials/html-examples/model-context-protocol.html" class="btn">Explore</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2025 LLM Tutorials. All rights reserved.</p>
+    </footer>
+</body>
+</html>
