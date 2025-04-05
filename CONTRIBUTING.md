@@ -62,7 +62,7 @@ If you'd like to contribute a tutorial:
    - `tutorials/getting-started/` - Introductory tutorials for beginners
    - `tutorials/concepts/` - Deeper explanations of architectural concepts and protocols
    - `tutorials/best-practices/` - Guidelines and recommendations
-   - `tutorials/html-examples/` - Interactive HTML visualizations and explanations
+   - `tutorials/web-explainers/` - Interactive web-based visualizations and explanations
 
 2. Format your tutorial:
    - For markdown tutorials:
@@ -71,7 +71,7 @@ If you'd like to contribute a tutorial:
      - Include clear step-by-step instructions
      - Add example code/diagrams where applicable
    
-   - For HTML examples:
+   - For web explainers:
      - Use HTML (`.html` extension)
      - Follow the naming convention: `descriptive-name.html`
      - Include inline CSS for styling
@@ -100,7 +100,7 @@ If you'd like to contribute a tutorial:
    Further learning resources or related topics
    ```
 
-4. Suggested structure for HTML examples:
+4. Suggested structure for web explainers:
    - Clear header/title section
    - Introduction that explains the concept
    - Visual sections with diagrams or illustrations
