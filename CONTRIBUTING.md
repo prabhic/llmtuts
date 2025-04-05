@@ -62,15 +62,23 @@ If you'd like to contribute a tutorial:
    - `tutorials/getting-started/` - Introductory tutorials for beginners
    - `tutorials/concepts/` - Deeper explanations of architectural concepts and protocols
    - `tutorials/best-practices/` - Guidelines and recommendations
+   - `tutorials/html-examples/` - Interactive HTML visualizations and explanations
 
 2. Format your tutorial:
-   - Use Markdown (`.md` extension)
-   - Follow the naming convention: `descriptive-name.md`
-   - Include clear step-by-step instructions
-   - Add example code/diagrams where applicable
-   - Follow the same Markdown format as the diagrams
+   - For markdown tutorials:
+     - Use Markdown (`.md` extension)
+     - Follow the naming convention: `descriptive-name.md`
+     - Include clear step-by-step instructions
+     - Add example code/diagrams where applicable
+   
+   - For HTML examples:
+     - Use HTML (`.html` extension)
+     - Follow the naming convention: `descriptive-name.html`
+     - Include inline CSS for styling
+     - Ensure the page is self-contained and works without external dependencies
+     - Make it responsive for different screen sizes
 
-3. Suggested tutorial structure:
+3. Suggested tutorial structure (Markdown):
    ```markdown
    # Title of Your Tutorial
 
@@ -92,6 +100,14 @@ If you'd like to contribute a tutorial:
    Further learning resources or related topics
    ```
 
+4. Suggested structure for HTML examples:
+   - Clear header/title section
+   - Introduction that explains the concept
+   - Visual sections with diagrams or illustrations
+   - Code examples when relevant
+   - Interactive elements where appropriate
+   - Consistent styling that works in light/dark modes
+
 ## Style Guidelines
 
 ### Mermaid Diagrams
@@ -108,6 +124,14 @@ If you'd like to contribute a tutorial:
 - Include descriptive alt text for any images
 - Use code blocks with proper syntax highlighting
 - Keep lines reasonably short for better readability
+
+### HTML Quality
+
+- Use semantic HTML elements
+- Include appropriate comments
+- Ensure accessibility (alt text, ARIA attributes when needed)
+- Test on multiple browsers
+- Keep styling simple and consistent
 
 ## Code of Conduct
 
