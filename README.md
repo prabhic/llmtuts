@@ -117,6 +117,7 @@ Learn how to create effective architecture diagrams and apply them to your proje
 
 ### Concepts & Protocols
 - [**Model Context Protocol**](tutorials/concepts/model-context-protocol.md) - Understanding why a specialized protocol for AI model interactions is needed despite existing REST APIs
+- [**Model Context Protocol (HTML Version)**](tutorials/html-examples/model-context-protocol.html) - Interactive HTML explanation of the Model Context Protocol
 
 ### Best Practices
 - **Guidelines for creating clear, informative architecture diagrams** (Coming Soon)
