@@ -11,6 +11,8 @@
             --accent-color: #5d93ff;
             --text-color: #333;
             --light-text: #666;
+            --date-color: #888;
+            --tag-bg: #eef2ff;
             --card-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
         
@@ -30,8 +32,44 @@
         header {
             background-color: var(--primary-color);
             color: white;
-            padding: 1.5rem 0;
+            padding: 2rem 0;
             text-align: center;
+        }
+        
+        .header-container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+            padding: 0.5rem 0;
+            font-weight: 500;
+            position: relative;
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: white;
+            transition: width 0.3s;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
         }
         
         .container {
@@ -49,102 +87,169 @@
         .site-intro h2 {
             margin-bottom: 1rem;
             color: var(--primary-color);
+            font-size: 2rem;
         }
         
         .site-intro p {
             max-width: 800px;
             margin: 0 auto 1.5rem;
             color: var(--light-text);
+            font-size: 1.1rem;
         }
         
-        .categories {
-            margin-bottom: 2rem;
-        }
-        
-        .categories h3 {
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--secondary-color);
-            color: var(--primary-color);
-        }
-        
-        .tutorial-cards {
+        .blog-posts {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 1rem;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
         }
         
-        .card {
+        .blog-card {
             background-color: white;
-            border-radius: 8px;
+            border-radius: 10px;
             overflow: hidden;
             box-shadow: var(--card-shadow);
             transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
         }
         
-        .card:hover {
+        .blog-card:hover {
             transform: translateY(-5px);
         }
         
-        .card-img {
-            height: 160px;
+        .blog-img {
+            height: 200px;
             background-color: var(--secondary-color);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
+            font-size: 4rem;
             color: var(--primary-color);
         }
         
-        .card-content {
-            padding: 1.5rem;
+        .blog-content {
+            padding: 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
         
-        .card-content h4 {
-            margin-bottom: 0.75rem;
+        .blog-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .date {
+            color: var(--date-color);
+            font-size: 0.9rem;
+        }
+        
+        .tags {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .tag {
+            background-color: var(--tag-bg);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
             color: var(--primary-color);
         }
         
-        .card-content p {
+        .blog-content h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            font-size: 1.6rem;
+        }
+        
+        .blog-content p {
             margin-bottom: 1.5rem;
             color: var(--light-text);
-            font-size: 0.95rem;
+            flex-grow: 1;
         }
         
-        .btn {
+        .read-more {
             display: inline-block;
             background-color: var(--accent-color);
             color: white;
-            padding: 0.6rem 1.2rem;
+            padding: 0.7rem 1.4rem;
             border-radius: 4px;
             text-decoration: none;
             font-weight: 500;
             transition: background-color 0.3s;
+            align-self: flex-start;
         }
         
-        .btn:hover {
+        .read-more:hover {
             background-color: var(--primary-color);
+        }
+        
+        .sidebar {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background-color: var(--secondary-color);
+            border-radius: 8px;
+        }
+        
+        .sidebar h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .categories-list {
+            list-style: none;
+        }
+        
+        .categories-list li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .categories-list a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .categories-list a:hover {
+            color: var(--accent-color);
         }
         
         footer {
             background-color: var(--secondary-color);
             text-align: center;
-            padding: 1.5rem 0;
-            margin-top: 2rem;
+            padding: 2rem 0;
+            margin-top: 4rem;
             color: var(--light-text);
         }
         
-        @media (max-width: 768px) {
-            .tutorial-cards {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        @media (min-width: 768px) {
+            .content-wrapper {
+                display: grid;
+                grid-template-columns: 2fr 1fr;
+                gap: 2rem;
+                align-items: start;
+            }
+            
+            .sidebar {
+                margin-top: 0;
             }
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>LLM Tutorials</h1>
+        <div class="header-container">
+            <h1>LLM Tutorials</h1>
+            <nav>
+                <a href="#concepts">Concepts</a>
+                <a href="#interactive">Interactive</a>
+                <a href="#guides">Guides</a>
+                <a href="https://github.com/prabhic/llmtuts">GitHub</a>
+            </nav>
+        </div>
     </header>
     
     <main class="container">
@@ -155,33 +260,85 @@
             and architectural concepts.</p>
         </section>
         
-        <section class="categories">
-            <h3>Concepts</h3>
-            <div class="tutorial-cards">
-                <div class="card">
-                    <div class="card-img">📝</div>
-                    <div class="card-content">
-                        <h4>Model Context Protocol</h4>
-                        <p>Learn why specialized protocols for LLM communication are needed and how they work.</p>
-                        <a href="tutorials/concepts/model-context-protocol.html" class="btn">Read More</a>
+        <div class="content-wrapper">
+            <section class="blog-posts">
+                <article class="blog-card">
+                    <div class="blog-img">📝</div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="date">April 5, 2025</span>
+                            <div class="tags">
+                                <span class="tag">Concept</span>
+                                <span class="tag">Interactive</span>
+                            </div>
+                        </div>
+                        <h3>Model Context Protocol</h3>
+                        <p>Learn why specialized protocols for LLM communication are needed despite existing REST APIs. 
+                        This tutorial explores the Model Context Protocol with detailed diagrams and explanations. 
+                        Understand the hierarchical structure of the protocol and how it enables more efficient 
+                        and effective communication with large language models.</p>
+                        <a href="tutorials/concepts/model-context-protocol.html" class="read-more">Read Markdown Tutorial</a>
                     </div>
-                </div>
-            </div>
-        </section>
-        
-        <section class="categories">
-            <h3>Interactive Explanations</h3>
-            <div class="tutorial-cards">
-                <div class="card">
-                    <div class="card-img">🔄</div>
-                    <div class="card-content">
-                        <h4>Model Context Protocol</h4>
-                        <p>An interactive visual explanation of the Model Context Protocol with code examples.</p>
-                        <a href="tutorials/html-examples/model-context-protocol.html" class="btn">Explore</a>
+                </article>
+                
+                <article class="blog-card">
+                    <div class="blog-img">🔄</div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="date">April 5, 2025</span>
+                            <div class="tags">
+                                <span class="tag">Interactive</span>
+                                <span class="tag">Web</span>
+                            </div>
+                        </div>
+                        <h3>Interactive Model Context Protocol</h3>
+                        <p>Explore the Model Context Protocol through an interactive web-based explanation. 
+                        This visual guide uses a conversational tone while maintaining technical accuracy, 
+                        making complex concepts easier to understand. See code examples and visual 
+                        comparisons that illustrate how the protocol works in practice.</p>
+                        <a href="tutorials/html-examples/model-context-protocol.html" class="read-more">View Interactive Guide</a>
                     </div>
-                </div>
-            </div>
-        </section>
+                </article>
+                
+                <!-- Placeholder for future tutorials -->
+                <article class="blog-card">
+                    <div class="blog-img">🧠</div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="date">Coming Soon</span>
+                            <div class="tags">
+                                <span class="tag">Concept</span>
+                                <span class="tag">Architecture</span>
+                            </div>
+                        </div>
+                        <h3>LLM Architecture Fundamentals</h3>
+                        <p>A comprehensive look at the architectural foundations of Large Language Models. 
+                        Learn about transformer architectures, attention mechanisms, and how these 
+                        components work together to create powerful language understanding capabilities.</p>
+                        <a href="#" class="read-more" style="background-color: #ccc; cursor: not-allowed;">Coming Soon</a>
+                    </div>
+                </article>
+            </section>
+            
+            <aside class="sidebar">
+                <h3>Categories</h3>
+                <ul class="categories-list">
+                    <li><a href="#concepts">Concepts</a></li>
+                    <li><a href="#interactive">Interactive Tutorials</a></li>
+                    <li><a href="#architecture">Architecture</a></li>
+                    <li><a href="#implementation">Implementation Guides</a></li>
+                    <li><a href="#case-studies">Case Studies</a></li>
+                </ul>
+                
+                <h3 style="margin-top: 2rem;">About</h3>
+                <p>LLM Tutorials is a curated collection of AI-generated architecture diagrams and tutorials. 
+                Discover and explore architectural concepts powered by AI, covering cloud, microservices, 
+                edge AI, and more.</p>
+                
+                <h3 style="margin-top: 2rem;">Connect</h3>
+                <p>Interested in contributing? <a href="https://github.com/prabhic/llmtuts" style="color: var(--accent-color);">Visit our GitHub repository</a> to learn how you can help expand our collection of tutorials.</p>
+            </aside>
+        </div>
     </main>
     
     <footer>
