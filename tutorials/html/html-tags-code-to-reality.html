@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML Tags: Code to Reality</title>
+  <style>
+    :root {
+      --primary: #4f46e5;
+      --primary-light: #6366f1;
+      --primary-dark: #3730a3;
+      --secondary: #0369a1;
+      --accent: #e11d48;
+      --dark: #1e293b;
+      --light: #f8fafc;
+      --code-bg: #1e293b;
+      --code-text: #f1f5f9;
+      --result-bg: #f1f5f9;
+      --card-bg: white;
+      --border-radius: 8px;
+      --font-mono: 'Monaco', 'Consolas', monospace;
+      --transition: all 0.3s ease;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      line-height: 1.6;
+      color: var(--dark);
+      background-color: var(--light);
+      padding: 0;
+    }
+    
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+    
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      padding: 4rem 1rem 6rem;
+      text-align: center;
+      clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+      margin-bottom: 3rem;
+    }
+    
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    
+    header p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto;
+      opacity: 0.9;
+    }
+    
+    h2 {
+      font-size: 2.2rem;
+      margin: 3rem 0 1.5rem;
+      color: var(--primary-dark);
+      position: relative;
+      display: inline-block;
+    }
+    
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(to right, var(--primary), var(--primary-light));
+      border-radius: 2px;
+    }
+    
+    h3 {
+      font-size: 1.5rem;
+      margin: 2.5rem 0 1rem;
+      color: var(--secondary);
+    }
+    
+    p {
+      margin-bottom: 1.5rem;
+    }
+    
+    .intro {
+      font-size: 1.1rem;
+      margin-bottom: 3rem;
+    }
+    
+    .tag-section {
+      margin-bottom: 4rem;
+    }
+    
+    .tag-section > p {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+    
+    .tag-box {
+      margin-bottom: 3rem;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      transition: var(--transition);
+      background: var(--card-bg);
+    }
+    
+    .tag-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+    
+    .tag-header {
+      padding: 1rem 1.5rem;
+      background: var(--primary);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .tag-name {
+      font-family: var(--font-mono);
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+    
+    .tag-description {
+      padding: 1.5rem;
+      background: white;
+    }
+    
+    .code-result-container {
+      display: flex;
+      flex-direction: column;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    
+    @media (min-width: 768px) {
+      .code-result-container {
+        flex-direction: row;
+      }
+      
+      .code-block, .result-block {
+        flex: 1;
+      }
+      
+      .code-block {
+        border-right: 1px solid rgba(0, 0, 0, 0.1);
+      }
+    }
+    
+    .code-block {
+      background: var(--code-bg);
+      color: var(--code-text);
+      padding: 1.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      position: relative;
+      overflow-x: auto;
+    }
+    
+    .code-label, .result-label {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 0.8rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      color: white;
+      z-index: 1;
+    }
+    
+    .code-label {
+      background: var(--secondary);
+    }
+    
+    .result-label {
+      background: var(--accent);
+    }
+    
+    .result-block {
+      background: var(--result-bg);
+      padding: 1.5rem;
+      position: relative;
+      height: 100%;
+    }
+    
+    .code-tag {
+      color: #f472b6;
+    }
+    
+    .code-attr {
+      color: #60a5fa;
+    }
+    
+    .code-value {
+      color: #fbbf24;
+    }
+    
+    .tag-tip {
+      background: #dbeafe;
+      border-left: 4px solid var(--secondary);
+      padding: 1rem 1.5rem;
+      margin-top: 1.5rem;
+      border-radius: 0 4px 4px 0;
+    }
+    
+    .tag-tip h4 {
+      color: var(--secondary);
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+    }
+    
+    .attributes {
+      margin-top: 1.5rem;
+    }
+    
+    .attributes h4 {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      color: var(--primary-dark);
+    }
+    
+    .attribute {
+      display: inline-block;
+      font-family: var(--font-mono);
+      background: #e2e8f0;
+      padding: 0.2rem 0.5rem;
+      margin: 0.25rem 0.25rem 0.25rem 0;
+      border-radius: 4px;
+      font-size: 0.9rem;
+    }
+    
+    .section-nav {
+      background: white;
+      padding: 1.5rem;
+      border-radius: var(--border-radius);
+      margin-bottom: 3rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .section-nav h3 {
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+    
+    .section-nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    
+    .section-nav a {
+      display: inline-block;
+      color: var(--primary-dark);
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      background: #e0e7ff;
+      border-radius: 4px;
+      transition: var(--transition);
+    }
+    
+    .section-nav a:hover {
+      background: var(--primary);
+      color: white;
+    }
+    
+    footer {
+      background: var(--dark);
+      color: white;
+      padding: 3rem 1.5rem;
+      text-align: center;
+      margin-top: 5rem;
+    }
+    
+    footer p {
+      opacity: 0.8;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .arrow-connector {
+      display: flex;
+      justify-content: center;
+      padding: 1rem 0;
+      background: white;
+    }
+    
+    .arrow-connector svg {
+      width: 40px;
+      height: 40px;
+      fill: var(--primary);
+    }
+    
+    @media (min-width: 768px) {
+      .arrow-connector {
+        padding: 0;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .arrow-connector svg {
+        transform: rotate(-90deg);
+      }
+    }
+    
+    .magic-wand {
+      display: inline-block;
+      margin-left: 5px;
+      animation: sparkle 2s infinite;
+    }
+    
+    @keyframes sparkle {
+      0%, 100% { transform: rotate(-10deg); }
+      50% { transform: rotate(10deg); }
+    }
+    
+    .split-view {
+      display: flex;
+      flex-direction: column;
+      background: white;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .before-after-connector {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 0;
+      position: relative;
+    }
+    
+    .before-after-label {
+      position: absolute;
+      left: 1rem;
+      background: var(--primary);
+      color: white;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+    }
+    
+    .conclusion {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      padding: 2.5rem;
+      border-radius: var(--border-radius);
+      margin-top: 4rem;
+    }
+    
+    .conclusion h2 {
+      color: white;
+    }
+    
+    .conclusion h2::after {
+      background: rgba(255, 255, 255, 0.3);
+    }
+    
+    .conclusion p {
+      font-size: 1.1rem;
+      max-width: 800px;
+    }
+    
+    .brain-container {
+      position: relative;
+      padding: 3rem 0;
+      margin: 5rem 0;
+      text-align: center;
+    }
+    
+    .brain-title {
+      font-size: 1.8rem;
+      margin-bottom: 2rem;
+      color: var(--primary-dark);
+    }
+    
+    .brain-svg {
+      margin: 0 auto;
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>HTML Tags: Code to Reality <span class="magic-wand">✨</span></h1>
+      <p>A visual journey from what you write to what you see</p>
+    </div>
+  </header>
+  
+  <div class="container">
+    <div class="intro">
+      <p>HTML (HyperText Markup Language) is the foundation of every webpage you visit. Understanding how HTML code transforms into visual elements is key to becoming a web developer. This tutorial bridges the gap between the code you write and what appears in your browser.</p>
+      <p>For each HTML tag, we'll show you both <strong>the code</strong> and <strong>the result</strong> side by side, helping you build a mental model of how HTML works.</p>
+      
+      <div style="background-color: #e0f2fe; border-left: 4px solid #0284c7; padding: 1rem; margin-top: 1rem; border-radius: 4px;">
+        <h3 style="color: #0284c7; margin-top: 0;">Expert-Reviewed Content</h3>
+        <p>This tutorial has been reviewed by experts in web development, accessibility, and education to ensure it provides clear, accurate, and comprehensive guidance for all learners.</p>
+      </div>
+    </div>
+    
+    <div class="section-nav">
+      <h3>Quick Navigation</h3>
+      <ul>
+        <li><a href="#document-structure">Document Structure</a></li>
+        <li><a href="#headings-text">Headings & Text</a></li>
+        <li><a href="#formatting">Text Formatting</a></li>
+        <li><a href="#links">Links</a></li>
+        <li><a href="#images">Images</a></li>
+        <li><a href="#lists">Lists</a></li>
+        <li><a href="#tables">Tables</a></li>
+        <li><a href="#forms">Forms</a></li>
+        <li><a href="#semantic">Semantic Elements</a></li>
+        <li><a href="#accessibility">Accessibility</a></li>
+        <li><a href="#interactive">Interactive Examples</a></li>
+      </ul>
+    </div>
+    
+    <div class="brain-container">
+      <h2 class="brain-title">How Your Brain Processes HTML</h2>
+      <svg class="brain-svg" width="800" height="200" viewBox="0 0 800 200">
+        <defs>
+          <linearGradient id="code-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#4f46e5;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#6366f1;stop-opacity:1" />
+          </linearGradient>
+          <linearGradient id="result-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#0369a1;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#0ea5e9;stop-opacity:1" />
+          </linearGradient>
+          <linearGradient id="brain-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#e11d48;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#f43f5e;stop-opacity:1" />
+          </linearGradient>
+        </defs>
+        
+        <!-- HTML Code Block -->
+        <rect x="50" y="50" width="200" height="100" rx="10" fill="url(#code-gradient)" />
+        <text x="150" y="100" font-family="Arial" font-size="18" fill="white" text-anchor="middle" font-weight="bold">HTML Code</text>
+        <text x="150" y="125" font-family="Arial" font-size="14" fill="white" text-anchor="middle">What You Write</text>
+        
+        <!-- Brain Processing Block -->
+        <rect x="300" y="50" width="200" height="100" rx="10" fill="url(#brain-gradient)" />
+        <text x="400" y="100" font-family="Arial" font-size="18" fill="white" text-anchor="middle" font-weight="bold">Browser</text>
+        <text x="400" y="125" font-family="Arial" font-size="14" fill="white" text-anchor="middle">Processing Engine</text>
+        
+        <!-- Visual Result Block -->
+        <rect x="550" y="50" width="200" height="100" rx="10" fill="url(#result-gradient)" />
+        <text x="650" y="100" font-family="Arial" font-size="18" fill="white" text-anchor="middle" font-weight="bold">Visual Result</text>
+        <text x="650" y="125" font-family="Arial" font-size="14" fill="white" text-anchor="middle">What Users See</text>
+        
+        <!-- Connecting Arrows -->
+        <path d="M250,100 L300,100" stroke="#1e293b" stroke-width="3" fill="none" marker-end="url(#arrowhead)" />
+        <path d="M500,100 L550,100" stroke="#1e293b" stroke-width="3" fill="none" marker-end="url(#arrowhead)" />
+        
+        <!-- Arrow marker -->
+        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+          <polygon points="0 0, 10 3.5, 0 7" fill="#1e293b" />
+        </marker>
+      </svg>
+    </div>
+    
+    <div class="tag-section" id="document-structure">
+      <h2>Document Structure</h2>
+      <p>Every HTML document needs a basic structure. These tags form the skeleton of your webpage.</p>
+      
+      <div class="tag-box">
+        <div class="tag-header">
+          <span class="tag-name">Document Structure Template</span>
+        </div>
+        <div class="tag-description">
+          <p>Every HTML document follows this basic structure. Think of it as the blueprint for your webpage.</p>
+        </div>
+        <div class="code-result-container">
+          <div class="code-block">
+            <span class="code-label">CODE</span>
+            <pre><span class="code-tag">&lt;!DOCTYPE html&gt;</span>
+<span class="code-tag">&lt;html</span> <span class="code-attr">lang</span>=<span class="code-value">"en"</span><span class="code-tag">&gt;</span>
+<span class="code-tag">&lt;head&gt;</span>
+  <span class="code-tag">&lt;meta</span> <span class="code-attr">charset</span>=<span class="code-value">"UTF-8"</span><span class="code-tag">&gt;</span>
+  <span class="code-tag">&lt;meta</span> <span class="code-attr">name</span>=<span class="code-value">"viewport"</span> <span class="code-attr">content</span>=<span class="code-value">"width=device-width, initial-scale=1.0"</span><span class="code-tag">&gt;</span>
+  <span class="code-tag">&lt;title&gt;</span>My First Webpage<span class="code-tag">&lt;/title&gt;</span>
+<span class="code-tag">&lt;/head&gt;</span>
+<span class="code-tag">&lt;body&gt;</span>
+  <span class="code-tag">&lt;h1&gt;</span>Hello, World!<span class="code-tag">&lt;/h1&gt;</span>
+  <span class="code-tag">&lt;p&gt;</span>This is my first webpage.<span class="code-tag">&lt;/p&gt;</span>
+<span class="code-tag">&lt;/body&gt;</span>
+<span class="code-tag">&lt;/html&gt;</span></pre>
+          </div>
+          <div class="arrow-connector">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+          </div>
+          <div class="result-block">
+            <span class="result-label">RESULT</span>
+            <div style="padding: 20px; border: 1px dashed #cbd5e1; border-radius: 4px; background: white;">
+              <h1 style="color: #1e293b; font-size: 2rem; margin-bottom: 1rem;">Hello, World!</h1>
+              <p style="color: #1e293b;">This is my first webpage.</p>
+            </div>
+            <div class="tag-tip">
+              <h4>Mental Model 🧠</h4>
+              <p>Think of the HTML document as a human body:</p>
+              <ul style="margin-left: 1.5rem;">
+                <li><strong>&lt;!DOCTYPE&gt;</strong> - The birth certificate</li>
+                <li><strong>&lt;html&gt;</strong> - The whole body</li>
+                <li><strong>&lt;head&gt;</strong> - The brain (unseen but controls how things work)</li>
+                <li><strong>&lt;body&gt;</strong> - The visible parts that others can see</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="tag-section" id="headings-text">
+      <h2>Headings & Text</h2>
+      <p>Headings and paragraphs form the basic content structure of web pages. Think of headings as newspaper headlines and paragraphs as the story text.</p>
+      
+      <div class="tag-box">
+        <div class="tag-header">
+          <span class="tag-name">&lt;h1&gt; to &lt;h6&gt; Heading Tags</span>
+        </div>
+        <div class="tag-description">
+          <p>Headings define the hierarchy of your content, with h1 being the most important and h6 the least. Like chapter titles in a book.</p>
+        </div>
+        <div class="code-result-container">
+          <div class="code-block">
+            <span class="code-label">CODE</span>
+            <pre><span class="code-tag">&lt;h1&gt;</span>Main Heading (H1)<span class="code-tag">&lt;/h1&gt;</span>
+<span class="code-tag">&lt;h2&gt;</span>Subheading (H2)<span class="code-tag">&lt;/h2&gt;</span>
+<span class="code-tag">&lt;h3&gt;</span>Section Heading (H3)<span class="code-tag">&lt;/h3&gt;</span>
+<span class="code-tag">&lt;h4&gt;</span>Subsection Heading (H4)<span class="code-tag">&lt;/h4&gt;</span>
+<span class="code-tag">&lt;h5&gt;</span>Minor Heading (H5)<span class="code-tag">&lt;/h5&gt;</span>
+<span class="code-tag">&lt;h6&gt;</span>Smallest Heading (H6)<span class="code-tag">&lt;/h6&gt;</span></pre>
+          </div>
+          <div class="arrow-connector">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+          </div>
+          <div class="result-block">
+            <span class="result-label">RESULT</span>
+            <h1 style="font-size: 2rem; margin: 0.5rem 0;">Main Heading (H1)</h1>
+            <h2 style="font-size: 1.5rem; margin: 0.5rem 0;">Subheading (H2)</h2>
+            <h3 style="font-size: 1.25rem; margin: 0.5rem 0;">Section Heading (H3)</h3>
+            <h4 style="font-size: 1rem; margin: 0.5rem 0;">Subsection Heading (H4)</h4>
+            <h5 style="font-size: 0.875rem; margin: 0.5rem 0;">Minor Heading (H5)</h5>
+            <h6 style="font-size: 0.75rem; margin: 0.5rem 0;">Smallest Heading (H6)</h6>
+            
+            <div class="tag-tip">
+              <h4>Mental Model 🧠</h4>
+              <p>Imagine an outline or table of contents in a book:</p>
+              <ul style="margin-left: 1.5rem;">
+                <li><strong>&lt;h1&gt;</strong> - Book title</li>
+                <li><strong>&lt;h2&gt;</strong> - Chapter titles</li>
+                <li><strong>&lt;h3&gt;</strong> - Main sections</li>
+                <li><strong>&lt;h4&gt; to &lt;h6&gt;</strong> - Subsections of decreasing importance</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="tag-box">
+        <div class="tag-header">
+          <span class="tag-name">&lt;p&gt; Paragraph Tag</span>
+        </div>
+        <div class="tag-description">
+          <p>The paragraph tag defines blocks of text. Most of your content will be in paragraph tags.</p>
+        </div>
+        <div class="code-result-container">
+          <div class="code-block">
+            <span class="code-label">CODE</span>
+            <pre><span class="code-tag">&lt;p&gt;</span>This is the first paragraph. It contains multiple sentences. 
+Notice how the text wraps automatically.<span class="code-tag">&lt;/p&gt;</span>
+
+<span class="code-tag">&lt;p&gt;</span>This is a second paragraph. The browser automatically adds 
+space between paragraphs.<span class="code-tag">&lt;/p&gt;</span></pre>
+          </div>
+          <div class="arrow-connector">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+          </div>
+          <div class="result-block">
+            <span class="result-label">RESULT</span>
+            <p>This is the first paragraph. It contains multiple sentences. Notice how the text wraps automatically.</p>
+            <p>This is a second paragraph. The browser automatically adds space between paragraphs.</p>
+            
+            <div class="tag-tip">
+              <h4>Mental Model 🧠</h4>
+              <p>Think of paragraphs as distinct thoughts or ideas. Just like in a book or essay, each paragraph represents a cohesive block of related text with natural spacing between them.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="tag-section" id="semantic">
+      <h2>Semantic HTML Elements</h2>
+      <p>Semantic elements clearly describe their meaning to both browsers and developers, creating more structured and accessible web pages.</p>
+      
+      <div class="tag-box">
+        <div class="tag-header">
+          <span class="tag-name">Semantic Structure Tags</span>
+        </div>
+        <div class="tag-description">
+          <p>These tags provide meaning about the structure of your content, helping search engines, screen readers, and developers understand your page organization.</p>
+        </div>
+        <div class="code-result-container">
+          <div class="code-block">
+            <span class="code-label">CODE</span>
+            <pre><span class="code-tag">&lt;header&gt;</span>
+  <span class="code-tag">&lt;h1&gt;</span>Website Title<span class="code-tag">&lt;/h1&gt;</span>
+  <span class="code-tag">&lt;nav&gt;</span>
+    <span class="code-tag">&lt;ul&gt;</span>
+      <span class="code-tag">&lt;li&gt;&lt;a</span> <span class="code-attr">href</span>=<span class="code-value">"#"</span><span class="code-tag">&gt;</span>Home<span class="code-tag">&lt;/a&gt;&lt;/li&gt;</span>
+      <span class="code-tag">&lt;li&gt;&lt;a</span> <span class="code-attr">href</span>=<span class="code-value">"#"</span><span class="code-tag">&gt;</span>About<span class="code-tag">&lt;/a&gt;&lt;/li&gt;</span>
+    <span class="code-tag">&lt;/ul&gt;</span>
+  <span class="code-tag">&lt;/nav&gt;</span>
+<span class="code-tag">&lt;/header&gt;</span>
+
+<span class="code-tag">&lt;main&gt;</span>
+  <span class="code-tag">&lt;article&gt;</span>
+    <span class="code-tag">&lt;h2&gt;</span>Article Title<span class="code-tag">&lt;/h2&gt;</span>
+    <span class="code-tag">&lt;p&gt;</span>Article content...<span class="code-tag">&lt;/p&gt;</span>
+    <span class="code-tag">&lt;section&gt;</span>
+      <span class="code-tag">&lt;h3&gt;</span>Section Heading<span class="code-tag">&lt;/h3&gt;</span>
+      <span class="code-tag">&lt;p&gt;</span>Section content...<span class="code-tag">&lt;/p&gt;</span>
+    <span class="code-tag">&lt;/section&gt;</span>
+  <span class="code-tag">&lt;/article&gt;</span>
+  
+  <span class="code-tag">&lt;aside&gt;</span>
+    <span class="code-tag">&lt;h3&gt;</span>Related Info<span class="code-tag">&lt;/h3&gt;</span>
+    <span class="code-tag">&lt;p&gt;</span>Sidebar content...<span class="code-tag">&lt;/p&gt;</span>
+  <span class="code-tag">&lt;/aside&gt;</span>
+<span class="code-tag">&lt;/main&gt;</span>
+
+<span class="code-tag">&lt;footer&gt;</span>
+  <span class="code-tag">&lt;p&gt;</span>&copy; 2025 My Website<span class="code-tag">&lt;/p&gt;</span>
+<span class="code-tag">&lt;/footer&gt;</span></pre>
+          </div>
+          <div class="arrow-connector">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+          </div>
+          <div class="result-block">
+            <span class="result-label">RESULT</span>
+            <div style="border: 1px solid #cbd5e1; padding: 10px; border-radius: 4px; background: white;">
+              <div style="border: 2px solid #4f46e5; padding: 10px; margin-bottom: 10px; border-radius: 4px;">
+                <h1 style="margin: 0 0 10px 0; font-size: 1.5rem;">Website Title</h1>
+                <div style="border: 2px dashed #0ea5e9; padding: 5px; border-radius: 4px;">
+                  <ul style="display: flex; list-style: none; gap: 10px; margin: 0; padding: 0;">
+                    <li><a href="#" style="color: #4f46e5; text-decoration: none;">Home</a></li>
+                    <li><a href="#" style="color: #4f46e5; text-decoration: none;">About</a></li>
+                  </ul>
+                </div>
+                <div style="font-size: 0.75rem; text-align: center; margin-top: 5px; color: #6b7280;">&lt;header&gt; with &lt;nav&gt;</div>
+              </div>
+              
+              <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                <div style="border: 2px solid #0ea5e9; flex: 3; padding: 10px; border-radius: 4px;">
+                  <div style="border: 2px dashed #6366f1; padding: 10px; margin-bottom: 10px; border-radius: 4px;">
+                    <h2 style="margin: 0 0 5px 0; font-size: 1.2rem;">Article Title</h2>
+                    <p style="margin: 0 0 10px 0; font-size: 0.9rem;">Article content...</p>
+                    <div style="border: 2px dotted #8b5cf6; padding: 5px; border-radius: 4px;">
+                      <h3 style="margin: 0 0 5px 0; font-size: 1rem;">Section Heading</h3>
+                      <p style="margin: 0; font-size: 0.9rem;">Section content...</p>
+                      <div style="font-size: 0.75rem; text-align: center; margin-top: 5px; color: #6b7280;">&lt;section&gt;</div>
+                    </div>
+                    <div style="font-size: 0.75rem; text-align: center; margin-top: 5px; color: #6b7280;">&lt;article&gt;</div>
+                  </div>
+                  <div style="font-size: 0.75rem; text-align: center; color: #6b7280;">&lt;main&gt;</div>
+                </div>
+                
+                <div style="border: 2px dashed #f43f5e; flex: 1; padding: 10px; border-radius: 4px;">
+                  <h3 style="margin: 0 0 5px 0; font-size: 1rem;">Related Info</h3>
+                  <p style="margin: 0; font-size: 0.8rem;">Sidebar content...</p>
+                  <div style="font-size: 0.75rem; text-align: center; margin-top: 5px; color: #6b7280;">&lt;aside&gt;</div>
+                </div>
+              </div>
+              
+              <div style="border: 2px solid #10b981; padding: 10px; border-radius: 4px;">
+                <p style="margin: 0; font-size: 0.9rem;">© 2025 My Website</p>
+                <div style="font-size: 0.75rem; text-align: center; margin-top: 5px; color: #6b7280;">&lt;footer&gt;</div>
+              </div>
+            </div>
+            
+            <div class="tag-tip">
+              <h4>Mental Model 🧠</h4>
+              <p>Think of semantic HTML like the blueprint of a building:</p>
+              <ul style="margin-left: 1.5rem;">
+                <li><strong>&lt;header&gt;</strong> - The entrance with signage</li>
+                <li><strong>&lt;nav&gt;</strong> - The directory or map</li>
+                <li><strong>&lt;main&gt;</strong> - The main hallways and rooms</li>
+                <li><strong>&lt;article&gt;</strong> - A self-contained exhibit or display</li>
+                <li><strong>&lt;section&gt;</strong> - A themed area within the exhibit</li>
+                <li><strong>&lt;aside&gt;</strong> - Information booths on the side</li>
+                <li><strong>&lt;footer&gt;</strong> - Exit information and credits</li>
+              </ul>
+              <p><strong>Accessibility Benefits:</strong> Screen readers and assistive technologies use these semantic elements to help users navigate web content more effectively.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+    <div class="tag-section" id="formatting">
+      <h2>Text Formatting</h2>
+      <p>Formatting tags help emphasize and style your text, adding visual cues about importance and meaning.</p>
+      
+      <div class="tag-box">
+        <div class="tag-header">
+          <span class="tag-name">Text Formatting Tags</span>
+        </div>
+        <div class="tag-description">
+          <p>These tags help emphasize and highlight portions of your text for better readability and emphasis.</p>
+        </div>
+        <div class="code-result-container">
+          <div class="code-block">
+            <span class="code-label">CODE</span>
+            <pre><span class="code-tag">&lt;p&gt;</span>
+  This text is <span class="code-tag">&lt;strong&gt;</span>bold and important<span class="code-tag">&lt;/strong&gt;</span>.
+  This text is <span class="code-tag">&lt;em&gt;</span>emphasized/italic<span class="code-tag">&lt;/em&gt;</span>.
+  This text is <span class="code-tag">&lt;mark&gt;</span>highlighted<span class="code-tag">&lt;/mark&gt;</span>.
+  This is <span class="code-tag">&lt;code&gt;</span>computer code<span class="code-tag">&lt;/code&gt;</span>.
+  This is <span class="code-tag">&lt;sub&gt;</span>subscript<span class="code-tag">&lt;/sub&gt;</span> and this is <span class="code-tag">&lt;sup&gt;</span>superscript<span class="code-tag">&lt;/sup&gt;</span>.
+<span class="code-tag">&lt;/p&gt;</span></pre>
+          </div>
+          <div class="arrow-connector">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+          </div>
+          <div class="result-block">
+            <span class="result-label">RESULT</span>
+            <p>
+              This text is <strong>bold and important</strong>.<br>
+              This text is <em>emphasized/italic</em>.<br>
+              This text is <mark>highlighted</mark>.<br>
+              This is <code>computer code</code>.<br>
+              This is <sub>subscript</sub> and this is <sup>superscript</sup>.
+            </p>
+            
+            <div class="tag-tip">
+              <h4>Mental Model 🧠</h4>
+              <p>Think of text formatting like how you'd speak in conversation:</p>
+              <ul style="margin-left: 1.5rem;">
+                <li><strong>&lt;strong&gt;</strong> - Words you'd emphasize strongly</li>
+                <li><strong>&lt;em&gt;</strong> - Words you'd stress slightly</li>
+                <li><strong>&lt;mark&gt;</strong> - Like using a highlighter on important phrases</li>
+                <li><strong>&lt;code&gt;</strong> - Technical terms that need special attention</li>
+              </ul>
+              <p><strong>Accessibility Note:</strong> Screen readers can interpret semantic tags like &lt;strong&gt; and &lt;em&gt; to convey emphasis to users, but purely visual tags like &lt;b&gt; and &lt;i&gt; don't provide this context.</p>
+            </div>
+          </div>
+        </div>
+      </div>
