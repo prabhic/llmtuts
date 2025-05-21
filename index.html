@@ -1,400 +1,216 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LLMTUTS | Expertly Crafted Technical Tutorials</title>
-    <style>
-        :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #f5f7fa;
-            --accent-color: #3498db;
-            --text-color: #333;
-            --light-text: #555;
-            --date-color: #777;
-            --tag-bg: #edf2f7;
-            --border-color: #e2e8f0;
-            --card-shadow: 0 4px 6px rgba(0,0,0,0.05), 0 1px 3px rgba(0,0,0,0.1);
-            --font-main: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            --font-heading: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: var(--font-main);
-            line-height: 1.6;
-            color: var(--text-color);
-            background-color: #fff;
-        }
-        
-        header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 2rem 0;
-            position: relative;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-        
-        .header-container {
-            width: 90%;
-            max-width: 1100px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        .site-title {
-            font-family: var(--font-heading);
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            font-size: 2.2rem;
-        }
-        
-        .site-tagline {
-            margin-top: 0.5rem;
-            font-weight: 400;
-            font-size: 1rem;
-            color: rgba(255,255,255,0.85);
-            letter-spacing: 0.3px;
-        }
-        
-        nav {
-            display: flex;
-            justify-content: center;
-            margin-top: 1.5rem;
-        }
-        
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 1rem;
-            padding: 0.5rem 0;
-            font-weight: 500;
-            position: relative;
-            font-size: 0.9rem;
-            letter-spacing: 0.3px;
-            text-transform: uppercase;
-        }
-        
-        nav a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background-color: var(--accent-color);
-            transition: width 0.3s;
-        }
-        
-        nav a:hover::after {
-            width: 100%;
-        }
-        
-        .container {
-            width: 90%;
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 3rem 0;
-        }
-        
-        .site-intro {
-            text-align: center;
-            margin-bottom: 4rem;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .site-intro h2 {
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-            font-size: 2rem;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-        }
-        
-        .site-intro p {
-            margin: 0 auto 1.5rem;
-            color: var(--light-text);
-            font-size: 1.1rem;
-            line-height: 1.7;
-        }
-        
-        .blog-posts {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2.5rem;
-        }
-        
-        .blog-card {
-            background-color: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: var(--card-shadow);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            border: 1px solid var(--border-color);
-        }
-        
-        .blog-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
-        }
-        
-        .blog-img {
-            height: 220px;
-            background-color: var(--secondary-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 5rem;
-            color: var(--primary-color);
-        }
-        
-        .blog-content {
-            padding: 2rem;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            border-top: 1px solid var(--border-color);
-        }
-        
-        .blog-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.2rem;
-        }
-        
-        .date {
-            color: var(--date-color);
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-        
-        .tags {
-            display: flex;
-            gap: 0.5rem;
-        }
-        
-        .tag {
-            background-color: var(--tag-bg);
-            padding: 0.3rem 0.7rem;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--primary-color);
-            letter-spacing: 0.3px;
-            text-transform: uppercase;
-        }
-        
-        .blog-content h3 {
-            margin-bottom: 0.8rem;
-            color: var(--primary-color);
-            font-size: 1.6rem;
-            font-weight: 700;
-            letter-spacing: -0.3px;
-            line-height: 1.3;
-        }
-        
-        .blog-content p {
-            margin-bottom: 1.8rem;
-            color: var(--light-text);
-            flex-grow: 1;
-            line-height: 1.7;
-        }
-        
-        .read-more {
-            display: inline-block;
-            background-color: var(--accent-color);
-            color: white;
-            padding: 0.8rem 1.5rem;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            letter-spacing: 0.3px;
-            transition: background-color 0.3s, transform 0.2s;
-            align-self: flex-start;
-        }
-        
-        .read-more:hover {
-            background-color: #2980b9;
-            transform: translateY(-1px);
-        }
-        
-        .sidebar {
-            margin-top: 2rem;
-            padding: 1.8rem;
-            background-color: var(--secondary-color);
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-        }
-        
-        .sidebar h3 {
-            margin-bottom: 1.2rem;
-            color: var(--primary-color);
-            font-size: 1.3rem;
-            font-weight: 700;
-            letter-spacing: -0.3px;
-            padding-bottom: 0.8rem;
-            border-bottom: 1px solid var(--border-color);
-        }
-        
-        .categories-list {
-            list-style: none;
-        }
-        
-        .categories-list li {
-            margin-bottom: 0.8rem;
-        }
-        
-        .categories-list a {
-            color: var(--text-color);
-            text-decoration: none;
-            transition: color 0.3s;
-            font-size: 1rem;
-            display: flex;
-            align-items: center;
-        }
-        
-        .categories-list a::before {
-            content: "→";
-            margin-right: 8px;
-            font-size: 14px;
-            color: var(--accent-color);
-        }
-        
-        .categories-list a:hover {
-            color: var(--accent-color);
-        }
-        
-        .sidebar p {
-            line-height: 1.7;
-            color: var(--light-text);
-        }
-        
-        footer {
-            background-color: var(--secondary-color);
-            text-align: center;
-            padding: 3rem 0;
-            margin-top: 5rem;
-            color: var(--light-text);
-            border-top: 1px solid var(--border-color);
-        }
-        
-        @media (min-width: 768px) {
-            .content-wrapper {
-                display: grid;
-                grid-template-columns: 2fr 1fr;
-                gap: 2.5rem;
-                align-items: start;
-            }
-            
-            .sidebar {
-                margin-top: 0;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LLMTUTS | AI-Augmented Developer Tutorials</title>
+
+  <!-----  GLOBAL STYLES  ----->
+  <style>
+    /* ---------- Base palette ---------- */
+    :root {
+      --bg:        #f9fafb;
+      --paper:     #ffffff;
+      --fg:        #334155;
+      --fg-muted:  #64748b;
+      --accent:    #4f46e5;
+      --border:    #e2e8f0;
+
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                   Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-mono: "Fira Code", SFMono-Regular, Menlo, monospace;
+    }
+
+    /* ---------- Reset / box-sizing ---------- */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* ---------- Body & global text ---------- */
+    body {
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.7;
+      color: var(--fg);
+      letter-spacing: 0.02em;
+      background: var(--bg);
+      padding: 2rem;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ---------- Layout container ---------- */
+    .container {
+      max-width: 760px;           /* narrower reading width */
+      margin: auto;
+      background: var(--paper);
+      padding: 2rem 3rem;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    /* ---------- Headings ---------- */
+    h1, h2, h3, h4 {
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      color: var(--accent);
+    }
+    h1 { font-size: 2rem;  margin-bottom: 0.5rem; }
+    h2 { font-size: 1.4rem; margin: 2.2rem 0 1.2rem; }
+    h3 { font-size: 1.15rem; }
+
+    /* ---------- Generic spacing ---------- */
+    p, ul, ol { margin-bottom: 1.1rem; }
+
+    /* ---------- Sections ---------- */
+    .section { margin-bottom: 2.5rem; }
+
+    /* ---------- Article card ---------- */
+    .article {
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .article h3 {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+    }
+    .meta {
+      font-size: 0.8rem;
+      color: var(--fg-muted);
+      margin: .2rem 0 .8rem;
+    }
+    .tags {
+      display: inline-block;
+      background: #e0e7ff;
+      color: #3730a3;
+      padding: 0 .45rem;
+      border-radius: 4px;
+      margin-right: .3rem;
+      font-size: 0.75rem;
+    }
+
+    /* ---------- Links ---------- */
+    a {
+      color: var(--accent);
+      text-decoration-thickness: 1px;
+    }
+    a:hover { text-decoration-thickness: 2px; }
+
+    /* ---------- Code style ---------- */
+    code, pre, .code-block {
+      font-family: var(--font-mono);
+      font-size: 0.92em;
+      line-height: 1.6;
+    }
+
+    /* ---------- Footer ---------- */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding-top: 1.5rem;
+      font-size: 0.8rem;
+      color: var(--fg-muted);
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    /* ---------- Dark-mode (auto) ---------- */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg:       #0f172a;
+        --paper:    #1e293b;
+        --fg:       #e2e8f0;
+        --fg-muted: #94a3b8;
+        --border:   #334155;
+      }
+    }
+
+    /* ---------- Mobile tweaks ---------- */
+    @media (max-width: 768px) {
+      body { padding: 1rem; }
+      .container { padding: 1.5rem; }
+    }
+  </style>
 </head>
+
 <body>
-    <header>
-        <div class="header-container">
-            <h1 class="site-title">LLMTUTS</h1>
-            <p class="site-tagline">Expertly Crafted Technical Tutorials</p>
-            <nav>
-                <a href="#concepts">Concepts</a>
-                <a href="#interactive">Interactive</a>
-                <a href="#guides">Guides</a>
-                <a href="https://github.com/prabhic/llmtuts">GitHub</a>
-            </nav>
-        </div>
+  <div class="container">
+
+    <!----- Header ----->
+    <header class="section">
+      <h1>LLMTUTS</h1>
+      <p class="subtitle" style="color: var(--fg-muted);">
+        AI-Augmented Tutorials & Weekly Technical Insights, Reviewed by Experts
+      </p>
     </header>
-    
-    <main class="container">
-        <section class="site-intro">
-            <h2>Advanced Technical Tutorials Through Iterative Refinement</h2>
-            <p>Welcome to LLMTUTS — a curated collection of expertly crafted technical tutorials developed through 
-            iterative collaboration with AI. Each article undergoes extensive refinement until it reaches 
-            professional quality, ensuring accurate, accessible, and insightful explanations of complex technical concepts.</p>
-            <p>Our tutorials span architecture patterns, protocols, implementation guides, and more — providing clear, 
-            authoritative guidance through both traditional documentation and interactive experiences.</p>
-        </section>
-        
-        <div class="content-wrapper">
-            <section class="blog-posts">
-                <!-- New Article: HTML Tags Tutorial -->
-                <article class="blog-card">
-                    <div class="blog-img" style="font-size: 4rem;">🌐</div>
-                    <div class="blog-content">
-                        <div class="blog-meta">
-                            <span class="date">April 18, 2025</span>
-                            <div class="tags">
-                                <span class="tag">Web Development</span>
-                                <span class="tag">HTML</span>
-                                <span class="tag">Interactive</span>
-                            </div>
-                        </div>
-                        <h3>HTML Tags: Code to Reality</h3>
-                        <p>Discover how HTML code transforms into visual elements in this interactive tutorial. We bridge the gap between what you write and what appears in the browser, with side-by-side comparisons of code and its rendered output. Perfect for beginners and those looking to strengthen their mental model of how HTML works, this guide uses creative visualizations and expert-reviewed content to make learning HTML intuitive and engaging.</p>
-                        <a href="tutorials/html/html-tags-code-to-reality.html" class="read-more">Explore HTML Tutorial</a>
-                    </div>
-                </article>
-                
-                <!-- Original Article -->
-                <article class="blog-card">
-                    <div class="blog-img">🔄</div>
-                    <div class="blog-content">
-                        <div class="blog-meta">
-                            <span class="date">April 5, 2025</span>
-                            <div class="tags">
-                                <span class="tag">Interactive</span>
-                                <span class="tag">Visual Guide</span>
-                            </div>
-                        </div>
-                        <h3>Interactive Model Context Protocol Guide</h3>
-                        <p>Experience the Model Context Protocol through our interactive web-based explanation. This visual guide presents 
-                        technical concepts in an approachable format while maintaining rigorous accuracy. Through interactive code examples 
-                        and visual comparisons, you'll develop an intuitive understanding of how the protocol functions in practical 
-                        applications — making implementation decisions easier and more informed.</p>
-                        <a href="tutorials/html-examples/model-context-protocol.html" class="read-more">Explore Interactive Guide</a>
-                    </div>
-                </article>
-            </section>
-            
-            <aside class="sidebar">
-                <h3>Categories</h3>
-                <ul class="categories-list">
-                    <li><a href="#concepts">Core Concepts</a></li>
-                    <li><a href="#interactive">Interactive Guides</a></li>
-                    <li><a href="#architecture">Architecture Patterns</a></li>
-                    <li><a href="#implementation">Implementation Guides</a></li>
-                    <li><a href="#case-studies">Case Studies</a></li>
-                </ul>
-                
-                <h3 style="margin-top: 2.5rem;">About LLMTUTS</h3>
-                <p>LLMTUTS provides authoritative technical explanations refined through iterative AI collaboration. 
-                Our tutorials cover a broad range of architectural concepts, protocols, and implementation strategies, 
-                with a focus on clarity, accuracy, and practical application.</p>
-                <p style="margin-top: 1rem;">Each tutorial is meticulously developed through multiple revision cycles 
-                until it meets our professional standards, ensuring you receive only the highest quality technical guidance.</p>
-                
-                <h3 style="margin-top: 2.5rem;">Contribute</h3>
-                <p>Interested in contributing to our growing knowledge repository? <a href="https://github.com/prabhic/llmtuts" style="color: var(--accent-color);">Visit our GitHub repository</a> to learn how you can help expand our collection of professional-grade tutorials.</p>
-            </aside>
+
+    <!----- Latest Articles ----->
+    <section class="section">
+      <h2>🆕 Latest Articles</h2>
+
+      <div class="article">
+        <h3>📦 HTML Tags: Code to Reality</h3>
+        <div class="meta">
+          Published: April&nbsp;18,&nbsp;2025&nbsp;•&nbsp;
+          <span class="tags">Web&nbsp;Dev</span>
+          <span class="tags">HTML</span>
         </div>
-    </main>
-    
-    <footer>
-        <p>&copy; 2025 LLMTUTS. All rights reserved.</p>
+        <p>A practical look at how HTML elements translate into visual layouts with side-by-side code and output.</p>
+        <a href="tutorials/html/html-tags-code-to-reality.html">→ Read Article</a>
+      </div>
+
+      <div class="article">
+        <h3>🔗 Model Context Protocol</h3>
+        <div class="meta">
+          Published: April&nbsp;5,&nbsp;2025&nbsp;•&nbsp;
+          <span class="tags">Protocol</span>
+          <span class="tags">AI</span>
+          <span class="tags">Architecture</span>
+        </div>
+        <p>Understand how structured context shapes LLM behaviour using the Model Context Protocol — with annotated examples.</p>
+        <a href="tutorials/html-examples/model-context-protocol.html">→ Read Article</a>
+      </div>
+
+      <div class="article">
+        <h3>🛠️ Coming&nbsp;Soon: Understanding Prompt Chain Tools</h3>
+        <div class="meta">
+          Scheduled: May&nbsp;24,&nbsp;2025&nbsp;•&nbsp;
+          <span class="tags">Prompt&nbsp;Engineering</span>
+          <span class="tags">Tools</span>
+        </div>
+        <p>We’ll explore how multi-step prompting and AI-chaining tools like LangGraph and Flowise improve agent workflows.</p>
+      </div>
+    </section>
+
+    <!----- Why section ----->
+    <section class="section">
+      <h2>🎯 Why LLMTUTS?</h2>
+      <p>LLMTUTS bridges the power of AI with 25 years of software-architecture experience — blending auto-generated content with architect-level review. It serves both as a publishing platform and a living developer notebook.</p>
+      <ul>
+        <li>✔️ Weekly updates across DevOps, ML, and system design</li>
+        <li>✔️ AI-generated, human-reviewed content</li>
+        <li>✔️ Clear diagrams, working code, and practical use-cases</li>
+      </ul>
+    </section>
+
+    <!----- Browse section ----->
+    <section class="section">
+      <h2>🌐 Browse Key Areas</h2>
+      <ul>
+        <li><a href="tutorials/getting-started/mermaid-basics.md">Mermaid Basics — Diagram Essentials</a></li>
+        <li><a href="tutorials/concepts/model-context-protocol.md">Model Context Protocol — AI Runtime Design</a></li>
+        <li><a href="https://github.com/prabhic/llmtuts" target="_blank">GitHub Repository</a></li>
+      </ul>
+    </section>
+
+    <!----- Footer ----->
+    <footer class="footer">
+      © 2025 LLMTUTS &nbsp;|&nbsp; AI + Human Knowledge Hub &nbsp;|&nbsp;
+      <a href="LICENSE">MIT License</a>
     </footer>
+
+  </div>
 </body>
 </html>
