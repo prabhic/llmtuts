@@ -2,215 +2,193 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LLMTUTS | AI-Augmented Developer Tutorials</title>
-
-  <!-----  GLOBAL STYLES  ----->
+  <title>LLM Tuts – AI‑Drafted. Human‑Refined.</title>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <!-- Favicon (quill + neural node combined in SVG) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233E2DFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 21l9-9'/%3E%3Cpath d='M15 7h0'/%3E%3Ccircle cx='17' cy='5' r='2' stroke='%23F0572D'/%3E%3C/svg%3E" />
   <style>
-    /* ---------- Base palette ---------- */
     :root {
-      --bg:        #f9fafb;
-      --paper:     #ffffff;
-      --fg:        #334155;
-      --fg-muted:  #64748b;
-      --accent:    #4f46e5;
-      --border:    #e2e8f0;
-
-      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI",
-                   Roboto, "Helvetica Neue", Arial, sans-serif;
-      --font-mono: "Fira Code", SFMono-Regular, Menlo, monospace;
+      --ai: #3e2dff;       /* Indigo – AI depth */
+      --human: #f0572d;    /* Coral – human touch */
+      --text: #2d2d2d;
+      --text-light: #666;
+      --bg: #ffffff;
+      --surface: #f9f9ff;
+      --radius: 12px;
     }
-
-    /* ---------- Reset / box-sizing ---------- */
-    *, *::before, *::after {
+    * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
-
-    /* ---------- Body & global text ---------- */
     body {
-      font-family: var(--font-sans);
-      font-size: 17px;
-      line-height: 1.7;
-      color: var(--fg);
-      letter-spacing: 0.02em;
+      font-family: 'Inter', system-ui, sans-serif;
+      color: var(--text);
       background: var(--bg);
-      padding: 2rem;
-      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
     }
-
-    /* ---------- Layout container ---------- */
-    .container {
-      max-width: 760px;           /* narrower reading width */
-      margin: auto;
-      background: var(--paper);
-      padding: 2rem 3rem;
-      border: 1px solid var(--border);
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    header {
+      padding: 4rem 1rem 2rem;
+      text-align: center;
     }
-
-    /* ---------- Headings ---------- */
-    h1, h2, h3, h4 {
+    .logo {
+      font-size: clamp(2.2rem, 5vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    .logo span.ai {
+      color: var(--ai);
+    }
+    .logo span.human {
+      color: var(--human);
+    }
+    .tagline {
+      margin-top: 0.5rem;
       font-weight: 600;
-      letter-spacing: -0.015em;
-      color: var(--accent);
+      color: var(--text-light);
     }
-    h1 { font-size: 2rem;  margin-bottom: 0.5rem; }
-    h2 { font-size: 1.4rem; margin: 2.2rem 0 1.2rem; }
-    h3 { font-size: 1.15rem; }
-
-    /* ---------- Generic spacing ---------- */
-    p, ul, ol { margin-bottom: 1.1rem; }
-
-    /* ---------- Sections ---------- */
-    .section { margin-bottom: 2.5rem; }
-
-    /* ---------- Article card ---------- */
-    .article {
-      margin-bottom: 2rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid var(--border);
+    /* Container */
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 1rem 4rem;
     }
-    .article h3 {
+    /* Section title */
+    .section-title {
+      margin: 2.5rem 0 1rem;
+      font-size: 1.35rem;
+      color: var(--ai);
+      font-weight: 700;
       display: flex;
       align-items: center;
-      gap: .4rem;
+      gap: 0.5rem;
+    }
+    .section-title::before {
+      content: '📚';
+      font-size: 1.2rem;
+    }
+    /* Article card */
+    .article {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+      transition: transform 0.15s ease;
+    }
+    .article:hover {
+      transform: translateY(-2px);
+    }
+    .article-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .badge-row {
+      margin: 0.3rem 0 0.75rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+    }
+    .badge {
+      background: var(--ai);
+      color: #fff;
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      display: inline-block;
+    }
+    .badge.human {
+      background: var(--human);
     }
     .meta {
       font-size: 0.8rem;
-      color: var(--fg-muted);
-      margin: .2rem 0 .8rem;
+      color: var(--text-light);
+      margin-bottom: 0.75rem;
     }
-    .tags {
-      display: inline-block;
-      background: #e0e7ff;
-      color: #3730a3;
-      padding: 0 .45rem;
-      border-radius: 4px;
-      margin-right: .3rem;
-      font-size: 0.75rem;
+    .excerpt {
+      margin-bottom: 0.85rem;
+      color: var(--text-light);
     }
-
-    /* ---------- Links ---------- */
-    a {
-      color: var(--accent);
-      text-decoration-thickness: 1px;
+    .read-link {
+      font-size: 0.87rem;
+      color: var(--ai);
+      text-decoration: none;
+      font-weight: 600;
     }
-    a:hover { text-decoration-thickness: 2px; }
-
-    /* ---------- Code style ---------- */
-    code, pre, .code-block {
-      font-family: var(--font-mono);
-      font-size: 0.92em;
-      line-height: 1.6;
-    }
-
-    /* ---------- Footer ---------- */
-    .footer {
-      border-top: 1px solid var(--border);
-      padding-top: 1.5rem;
-      font-size: 0.8rem;
-      color: var(--fg-muted);
+    /* Footer */
+    footer {
+      padding: 2rem 1rem;
       text-align: center;
-      margin-top: 3rem;
+      font-size: 0.8rem;
+      color: var(--text-light);
+      border-top: 1px solid #eee;
     }
-
-    /* ---------- Dark-mode (auto) ---------- */
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg:       #0f172a;
-        --paper:    #1e293b;
-        --fg:       #e2e8f0;
-        --fg-muted: #94a3b8;
-        --border:   #334155;
-      }
+    /* GitHub icon */
+    .github-icon {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
     }
-
-    /* ---------- Mobile tweaks ---------- */
-    @media (max-width: 768px) {
-      body { padding: 1rem; }
-      .container { padding: 1.5rem; }
+    .github-icon:hover {
+      color: var(--ai);
     }
   </style>
 </head>
-
 <body>
-  <div class="container">
+  <header>
+    <h1 class="logo"><span class="ai">LLM</span> <span class="human">Tuts</span></h1>
+    <p class="tagline">AI‑Drafted. Human‑Refined.</p>
+  </header>
 
-    <!----- Header ----->
-    <header class="section">
-      <h1>LLMTUTS</h1>
-      <p class="subtitle" style="color: var(--fg-muted);">
-        AI-Augmented Tutorials & Weekly Technical Insights, Reviewed by Experts
-      </p>
-    </header>
+  <main class="container">
+    <h2 class="section-title">Latest Articles</h2>
 
-    <!----- Latest Articles ----->
-    <section class="section">
-      <h2>🆕 Latest Articles</h2>
-
-      <div class="article">
-        <h3>📦 HTML Tags: Code to Reality</h3>
-        <div class="meta">
-          Published: April&nbsp;18,&nbsp;2025&nbsp;•&nbsp;
-          <span class="tags">Web&nbsp;Dev</span>
-          <span class="tags">HTML</span>
-        </div>
-        <p>A practical look at how HTML elements translate into visual layouts with side-by-side code and output.</p>
-        <a href="tutorials/html/html-tags-code-to-reality.html">→ Read Article</a>
+    <!-- Article 1 -->
+    <article class="article">
+      <a href="tutorials/html/html-tags-code-to-reality.html" class="article-title">HTML Tags: Code to Reality</a>
+      <div class="meta">Published: April 18, 2025 · Web Dev · HTML</div>
+      <p class="excerpt">A practical look at how HTML elements translate into visual layouts with side‑by‑side code and output.</p>
+      <div class="badge-row">
+        <span class="badge">🤖 drafted</span>
+        <span class="badge human">👨‍💻 polished</span>
       </div>
+      <a href="tutorials/html/html-tags-code-to-reality.html" class="read-link">→ Read Article</a>
+    </article>
 
-      <div class="article">
-        <h3>🔗 Model Context Protocol</h3>
-        <div class="meta">
-          Published: April&nbsp;5,&nbsp;2025&nbsp;•&nbsp;
-          <span class="tags">Protocol</span>
-          <span class="tags">AI</span>
-          <span class="tags">Architecture</span>
-        </div>
-        <p>Understand how structured context shapes LLM behaviour using the Model Context Protocol — with annotated examples.</p>
-        <a href="tutorials/html-examples/model-context-protocol.html">→ Read Article</a>
+    <!-- Article 2 -->
+    <article class="article">
+      <a href="tutorials/html-examples/model-context-protocol.html" class="article-title">Model Context Protocol</a>
+      <div class="meta">Published: April 5, 2025 · Protocol · AI · Architecture</div>
+      <p class="excerpt">Understand how structured context shapes LLM behaviour using the Model Context Protocol — with annotated examples.</p>
+      <div class="badge-row">
+        <span class="badge">🤖 drafted</span>
+        <span class="badge human">👨‍💻 polished</span>
       </div>
+      <a href="tutorials/html-examples/model-context-protocol.html" class="read-link">→ Read Article</a>
+    </article>
 
-      <div class="article">
-        <h3>🛠️ Coming&nbsp;Soon: Understanding Prompt Chain Tools</h3>
-        <div class="meta">
-          Scheduled: May&nbsp;24,&nbsp;2025&nbsp;•&nbsp;
-          <span class="tags">Prompt&nbsp;Engineering</span>
-          <span class="tags">Tools</span>
-        </div>
-        <p>We’ll explore how multi-step prompting and AI-chaining tools like LangGraph and Flowise improve agent workflows.</p>
-      </div>
-    </section>
 
-    <!----- Why section ----->
-    <section class="section">
-      <h2>🎯 Why LLMTUTS?</h2>
-      <p>LLMTUTS bridges the power of AI with 25 years of software-architecture experience — blending auto-generated content with architect-level review. It serves both as a publishing platform and a living developer notebook.</p>
-      <ul>
-        <li>✔️ Weekly updates across DevOps, ML, and system design</li>
-        <li>✔️ AI-generated, human-reviewed content</li>
-        <li>✔️ Clear diagrams, working code, and practical use-cases</li>
-      </ul>
-    </section>
+    <!-- GitHub Link -->
+    <div style="text-align: center; margin-top: 2rem;">
+      <a href="https://github.com/prabhic/llmtuts" target="_blank" class="github-icon">
+        <svg height="24" width="24" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+        </svg>
+        GitHub Repository
+      </a>
+    </div>
+  </main>
 
-    <!----- Browse section ----->
-    <section class="section">
-      <h2>🌐 Browse Key Areas</h2>
-      <ul>
-        <li><a href="tutorials/getting-started/mermaid-basics.md">Mermaid Basics — Diagram Essentials</a></li>
-        <li><a href="tutorials/concepts/model-context-protocol.md">Model Context Protocol — AI Runtime Design</a></li>
-        <li><a href="https://github.com/prabhic/llmtuts" target="_blank">GitHub Repository</a></li>
-      </ul>
-    </section>
-
-    <!----- Footer ----->
-    <footer class="footer">
-      © 2025 LLMTUTS &nbsp;|&nbsp; AI + Human Knowledge Hub &nbsp;|&nbsp;
-      <a href="LICENSE">MIT License</a>
-    </footer>
-
-  </div>
+  <footer>
+    © 2025 LLM Tuts · Built with curiosity and coral‑tinged care.
+  </footer>
 </body>
 </html>
