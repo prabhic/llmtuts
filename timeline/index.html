@@ -487,53 +487,12 @@
 
   <script>
     /* ---------- Data with Links ---------- */
-    const data = [
-      {
-        date: "2025-05-22",
-        title: "Anthropic launches Claude 4 (Opus & Sonnet)",
-        tag: "model",
-        why: "Improved coding & multitool reasoning",
-        impact: "Raises bar for developer‑oriented agents",
-        next: "Watch IDE plugins & long‑run agent demos",
-        announcement: "https://www.anthropic.com/news/claude-4",
-        docs: "https://docs.anthropic.com/en/home"
-      },
-      {
-        date: "2025-05-19",
-        title: "Microsoft unveils NLWeb at Build 2025",
-        tag: "web",
-        why: "Open protocol for on‑site natural‑language search",
-        impact: "Decentralises AI UX; every site can host its own chatbot",
-        next: "Early pilots on TripAdvisor, Shopify by June",
-        announcement: "https://news.microsoft.com/source/features/company-news/introducing-nlweb-bringing-conversational-interfaces-directly-to-the-web/",
-        docs: "https://github.com/microsoft/NLWeb"
-      },
-      {
-        date: "2025-04-09",
-        title: "Google announces Agent‑2‑Agent (A2A) protocol",
-        tag: "protocol",
-        why: "Standard for cross‑vendor agent communication",
-        impact: "Multi‑agent workflows become portable",
-        next: "Spec v1.0 due Q3; OSS SDKs incoming",
-        announcement: "https://developers.googleblog.com/en/a2a-a-new-era-of-agent-interoperability/",
-        docs: "https://google.github.io/A2A/#/"
-      },
-      {
-        date: "2025-03-26",
-        title: "Model Context Protocol v1.0 ships",
-        tag: "protocol",
-        why: "Unified way to stream context & tools to LLMs",
-        impact: "Bridges editors, browsers, servers with AI",
-        next: "Integration into NLWeb endpoints by default",
-        announcement: "https://github.com/modelcontextprotocol",
-        docs: "https://github.com/modelcontextprotocol/mcp"
-      }
-    ];
+    // Removed hardcoded data array. Data will be fetched from data.json.
 
     /* ---------- Render Timeline ---------- */
-    function renderTimeline() {
+    function renderTimeline(data) {
       const timeline = document.getElementById("timeline");
-      
+      timeline.innerHTML = ""; // Clear previous content if any
       data.forEach((evt, index) => {
         const eventElement = document.createElement("article");
         eventElement.className = `event ${evt.tag}`;
@@ -609,9 +568,15 @@
 
     /* ---------- Initialize ---------- */
     document.addEventListener('DOMContentLoaded', () => {
-      renderTimeline();
-      createParticles();
-      setupScrollAnimations();
+      fetch('data.json')
+        .then(response => response.json())
+        .then(data => {
+          // Sort by date descending (latest first)
+          data.sort((a, b) => new Date(b.date) - new Date(a.date));
+          renderTimeline(data);
+          createParticles();
+          setupScrollAnimations();
+        });
     });
 
     /* ---------- Mouse Trail Effect ---------- */

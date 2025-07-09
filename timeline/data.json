@@ -1,0 +1,82 @@
+[
+  {
+    "date": "2023-03-16",
+    "title": "Warp integrates AI with Warp AI (terminal chat)",
+    "tag": "cli_tool",
+    "why": "Embed ChatGPT-based assistant directly into the terminal",
+    "impact": "Slack‑like chat within terminal, AI‑powered command suggestions, error explanations, and execution",
+    "next": "Expand terminal‑context awareness, port to more platforms, evolve into multi‑agent workflows",
+    "announcement": "https://www.warp.dev/blog/introducing-warp-ai",
+    "docs": "https://docs.warp.dev"
+  },
+  {
+    "date": "2025-02-24",
+    "title": "Anthropic releases Claude Code (research preview)",
+    "tag": "cli_tool",
+    "why": "Terminal-based agentic coding assistant",
+    "impact": "First major LLM CLI tool with codebase understanding, editing, git integration",
+    "next": "Expand usage, public release beyond research preview",
+    "announcement": "https://docs.anthropic.com/en/release-notes/claude-code",
+    "docs": "https://github.com/anthropics/claude-code"
+  },
+  {
+    "date": "2025-04-16",
+    "title": "OpenAI launches Codex CLI",
+    "tag": "cli_tool",
+    "why": "Local, natural‑language terminal coding with approval modes",
+    "impact": "Open‑source CLI agent enabling local AI‑powered coding workflows",
+    "next": "Support GPT‑4.1/model expansion, community contributions",
+    "announcement": "https://ai2sql.io/openai-codex-cli-announcement",
+    "docs": "https://github.com/openai/codex"
+  },
+  {
+    "date": "2025-06-25",
+    "title": "Google unveils Gemini CLI",
+    "tag": "cli_tool",
+    "why": "Open‑source AI agent with Gemini 2.5 Pro in terminals",
+    "impact": "Largest token context (1 M tokens), integrated MCP, media generation support",
+    "next": "Preview expansions, community growth, deeper IDE/terminal sync",
+    "announcement": "https://blog.google/technology/developers/introducing-gemini-cli-open-source-ai-agent/",
+    "docs": "https://github.com/google-gemini/gemini-cli"
+  },
+  {
+    "date": "2025-05-22",
+    "title": "Anthropic launches Claude 4 (Opus & Sonnet)",
+    "tag": "model",
+    "why": "Improved coding & multitool reasoning",
+    "impact": "Raises bar for developer‑oriented agents",
+    "next": "Watch IDE plugins & long‑run agent demos",
+    "announcement": "https://www.anthropic.com/news/claude-4",
+    "docs": "https://docs.anthropic.com/en/home"
+  },
+  {
+    "date": "2025-05-19",
+    "title": "Microsoft unveils NLWeb at Build 2025",
+    "tag": "web",
+    "why": "Open protocol for on‑site natural‑language search",
+    "impact": "Decentralises AI UX; every site can host its own chatbot",
+    "next": "Early pilots on TripAdvisor, Shopify by June",
+    "announcement": "https://news.microsoft.com/source/features/company-news/introducing-nlweb-bringing-conversational-interfaces-directly-to-the-web/",
+    "docs": "https://github.com/microsoft/NLWeb"
+  },
+  {
+    "date": "2025-04-09",
+    "title": "Google announces Agent‑2‑Agent (A2A) protocol",
+    "tag": "protocol",
+    "why": "Standard for cross‑vendor agent communication",
+    "impact": "Multi‑agent workflows become portable",
+    "next": "Spec v1.0 due Q3; OSS SDKs incoming",
+    "announcement": "https://developers.googleblog.com/en/a2a-a-new-era-of-agent-interoperability/",
+    "docs": "https://google.github.io/A2A/#/"
+  },
+  {
+    "date": "2025-03-26",
+    "title": "Model Context Protocol v1.0 ships",
+    "tag": "protocol",
+    "why": "Unified way to stream context & tools to LLMs",
+    "impact": "Bridges editors, browsers, servers with AI",
+    "next": "Integration into NLWeb endpoints by default",
+    "announcement": "https://github.com/modelcontextprotocol",
+    "docs": "https://github.com/modelcontextprotocol/mcp"
+  }
+] 
