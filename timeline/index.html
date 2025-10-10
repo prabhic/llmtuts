@@ -21,6 +21,12 @@
       --model: linear-gradient(135deg, #ff6b6b, #ee5a24);
       --protocol: linear-gradient(135deg, #4834d4, #686de0);
       --web: linear-gradient(135deg, #00d2d3, #54a0ff);
+      --inference: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+      --generation: linear-gradient(135deg, #4ecdc4, #44a08d);
+      --agentic: linear-gradient(135deg, #f093fb, #f5576c);
+      --voice: linear-gradient(135deg, #fa709a, #fee140);
+      --creation: linear-gradient(135deg, #30cfd0, #330867);
+      --data: linear-gradient(135deg, #a8edea, #fed6e3);
       
       --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.3);
       --shadow-glow: 0 0 20px rgba(0, 212, 255, 0.2);
@@ -384,10 +390,66 @@
       --section-color: #00d2d3;
     }
 
+    .inference {
+      --tag-gradient: var(--inference);
+      --dot-gradient: var(--inference);
+      --dot-glow: rgba(255, 107, 107, 0.4);
+      --section-color: #ff6b6b;
+    }
+
+    .generation {
+      --tag-gradient: var(--generation);
+      --dot-gradient: var(--generation);
+      --dot-glow: rgba(78, 205, 196, 0.4);
+      --section-color: #4ecdc4;
+    }
+
+    .agentic {
+      --tag-gradient: var(--agentic);
+      --dot-gradient: var(--agentic);
+      --dot-glow: rgba(240, 147, 251, 0.4);
+      --section-color: #f093fb;
+    }
+
+    .voice {
+      --tag-gradient: var(--voice);
+      --dot-gradient: var(--voice);
+      --dot-glow: rgba(250, 112, 154, 0.4);
+      --section-color: #fa709a;
+    }
+
+    .creation {
+      --tag-gradient: var(--creation);
+      --dot-gradient: var(--creation);
+      --dot-glow: rgba(48, 207, 208, 0.4);
+      --section-color: #30cfd0;
+    }
+
+    .data {
+      --tag-gradient: var(--data);
+      --dot-gradient: var(--data);
+      --dot-glow: rgba(168, 237, 234, 0.4);
+      --section-color: #a8edea;
+    }
+
+    .cli_tool {
+      --tag-gradient: linear-gradient(135deg, #1dd1a1, #10ac84);
+      --dot-gradient: linear-gradient(135deg, #1dd1a1, #10ac84);
+      --dot-glow: rgba(29, 209, 161, 0.4);
+      --section-color: #1dd1a1;
+    }
+
     /* Tag Icons */
     .model .event-tag::after { content: '🤖'; }
     .protocol .event-tag::after { content: '🔗'; }
     .web .event-tag::after { content: '🌐'; }
+    .cli_tool .event-tag::after { content: '💻'; }
+    .inference .event-tag::after { content: '⚡'; }
+    .generation .event-tag::after { content: '🎨'; }
+    .agentic .event-tag::after { content: '🤖'; }
+    .voice .event-tag::after { content: '🎤'; }
+    .creation .event-tag::after { content: '✨'; }
+    .data .event-tag::after { content: '💾'; }
 
     /* ---------- Responsive Design ---------- */
     @media (max-width: 768px) {

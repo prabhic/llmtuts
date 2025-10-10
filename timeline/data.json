@@ -10,6 +10,96 @@
     "docs": "https://docs.warp.dev"
   },
   {
+    "date": "2024-06-12",
+    "title": "Stability AI releases Stable Diffusion 3",
+    "tag": "generation",
+    "why": "Multimodal Diffusion Transformer (MMDiT) architecture; first open-source DiT model",
+    "impact": "Multi-subject prompts work reliably, text spelling vastly improved, transformers replace U-Net",
+    "next": "SD 3.5 variants, community fine-tuning, DiT architecture becomes standard",
+    "announcement": "https://stability.ai/news/stable-diffusion-3",
+    "docs": "https://github.com/Stability-AI/generative-models"
+  },
+  {
+    "date": "2024-06-20",
+    "title": "Anthropic launches Claude Artifacts",
+    "tag": "creation",
+    "why": "No-code interactive app builder in conversational interface",
+    "impact": "500M+ artifacts created; democratizes app development without coding skills",
+    "next": "Expand to more artifact types, collaborative editing, marketplace",
+    "announcement": "https://www.anthropic.com/news/claude-3-5-sonnet",
+    "docs": "https://support.anthropic.com/en/articles/9487310-what-are-artifacts-and-how-do-i-use-them"
+  },
+  {
+    "date": "2024-08-01",
+    "title": "Black Forest Labs launches Flux.1",
+    "tag": "generation",
+    "why": "12B parameter flow transformer by original Stable Diffusion creators; $31M funding",
+    "impact": "Matches DALL-E 3 in prompt fidelity, rivals Midjourney photorealism, fixes hands consistently",
+    "next": "Flow matching becomes new standard, community adoption, commercial expansion",
+    "announcement": "https://blackforestlabs.ai/announcing-black-forest-labs/",
+    "docs": "https://github.com/black-forest-labs/flux"
+  },
+  {
+    "date": "2024-09-12",
+    "title": "OpenAI releases o1 reasoning model",
+    "tag": "model",
+    "why": "PhD-level reasoning with chain-of-thought processing",
+    "impact": "89th percentile competitive programming; breakthrough in complex problem-solving and mathematics",
+    "next": "Expand reasoning capabilities, reduce latency, multimodal reasoning",
+    "announcement": "https://openai.com/index/introducing-openai-o1-preview/",
+    "docs": "https://platform.openai.com/docs/guides/reasoning"
+  },
+  {
+    "date": "2024-09-25",
+    "title": "Google launches NotebookLM Audio Overview",
+    "tag": "generation",
+    "why": "Transforms documents into engaging podcasts in 76 languages",
+    "impact": "Automated content repurposing; learning becomes conversational and accessible",
+    "next": "Personalized narration styles, interactive Q&A, video generation",
+    "announcement": "https://blog.google/technology/ai/notebooklm-audio-overviews/",
+    "docs": "https://notebooklm.google/"
+  },
+  {
+    "date": "2024-10-22",
+    "title": "Anthropic releases Claude computer use API",
+    "tag": "agentic",
+    "why": "First AI to control computers visually like humans",
+    "impact": "AI can navigate any UI, not just APIs; enables visual desktop automation",
+    "next": "Expand to mobile devices, improve accuracy, multi-screen support",
+    "announcement": "https://www.anthropic.com/news/developing-computer-use",
+    "docs": "https://docs.anthropic.com/en/docs/build-with-claude/computer-use"
+  },
+  {
+    "date": "2024-10-01",
+    "title": "OpenAI launches Realtime API with native voice",
+    "tag": "voice",
+    "why": "Direct speech-to-speech processing without transcription bottleneck",
+    "impact": "Native voice AI with emotion, interruption handling; true conversational interfaces",
+    "next": "Expand language support, reduce latency, multimodal voice+vision",
+    "announcement": "https://openai.com/index/introducing-the-realtime-api/",
+    "docs": "https://platform.openai.com/docs/guides/realtime"
+  },
+  {
+    "date": "2024-11-18",
+    "title": "Cerebras launches inference API at 2,500+ tokens/sec",
+    "tag": "inference",
+    "why": "19x faster than GPU inference; breakthrough in real-time AI responses",
+    "impact": "Sub-second responses for complex queries; enables new interactive use cases",
+    "next": "Expand model support, reduce costs, edge deployment",
+    "announcement": "https://cerebras.ai/blog/cerebras-inference",
+    "docs": "https://inference-docs.cerebras.ai/introduction"
+  },
+  {
+    "date": "2024-12-15",
+    "title": "Nvidia acquires Gretel for synthetic data",
+    "tag": "data",
+    "why": "$320M+ investment signals synthetic data as core AI infrastructure",
+    "impact": "Solves data scarcity; enables privacy-preserving AI training at scale",
+    "next": "Integration with Nvidia ecosystem, vertical-specific synthetic datasets",
+    "announcement": "https://blogs.nvidia.com/blog/ai-synthetic-data-gretel/",
+    "docs": "https://gretel.ai/"
+  },
+  {
     "date": "2025-02-24",
     "title": "Anthropic releases Claude Code (research preview)",
     "tag": "cli_tool",
@@ -20,44 +110,34 @@
     "docs": "https://github.com/anthropics/claude-code"
   },
   {
-    "date": "2025-04-16",
-    "title": "OpenAI launches Codex CLI",
-    "tag": "cli_tool",
-    "why": "Local, natural‑language terminal coding with approval modes",
-    "impact": "Open‑source CLI agent enabling local AI‑powered coding workflows",
-    "next": "Support GPT‑4.1/model expansion, community contributions",
-    "announcement": "https://ai2sql.io/openai-codex-cli-announcement",
-    "docs": "https://github.com/openai/codex"
+    "date": "2025-03-10",
+    "title": "OpenAI releases Sora 2 with social features",
+    "tag": "generation",
+    "why": "Real-time video generation with cameos, remixing, social sharing",
+    "impact": "Democratizes video production; creators build with AI-generated content",
+    "next": "Longer videos, higher resolution, API access for developers",
+    "announcement": "https://openai.com/sora",
+    "docs": "https://openai.com/sora"
   },
   {
-    "date": "2025-06-25",
-    "title": "Google unveils Gemini CLI",
-    "tag": "cli_tool",
-    "why": "Open‑source AI agent with Gemini 2.5 Pro in terminals",
-    "impact": "Largest token context (1 M tokens), integrated MCP, media generation support",
-    "next": "Preview expansions, community growth, deeper IDE/terminal sync",
-    "announcement": "https://blog.google/technology/developers/introducing-gemini-cli-open-source-ai-agent/",
-    "docs": "https://github.com/google-gemini/gemini-cli"
+    "date": "2025-03-26",
+    "title": "Model Context Protocol v1.0 ships",
+    "tag": "protocol",
+    "why": "Unified way to stream context & tools to LLMs",
+    "impact": "Bridges editors, browsers, servers with AI",
+    "next": "Integration into NLWeb endpoints by default",
+    "announcement": "https://github.com/modelcontextprotocol",
+    "docs": "https://github.com/modelcontextprotocol/mcp"
   },
   {
-    "date": "2025-05-22",
-    "title": "Anthropic launches Claude 4 (Opus & Sonnet)",
-    "tag": "model",
-    "why": "Improved coding & multitool reasoning",
-    "impact": "Raises bar for developer‑oriented agents",
-    "next": "Watch IDE plugins & long‑run agent demos",
-    "announcement": "https://www.anthropic.com/news/claude-4",
-    "docs": "https://docs.anthropic.com/en/home"
-  },
-  {
-    "date": "2025-05-19",
-    "title": "Microsoft unveils NLWeb at Build 2025",
-    "tag": "web",
-    "why": "Open protocol for on‑site natural‑language search",
-    "impact": "Decentralises AI UX; every site can host its own chatbot",
-    "next": "Early pilots on TripAdvisor, Shopify by June",
-    "announcement": "https://news.microsoft.com/source/features/company-news/introducing-nlweb-bringing-conversational-interfaces-directly-to-the-web/",
-    "docs": "https://github.com/microsoft/NLWeb"
+    "date": "2025-04-03",
+    "title": "Midjourney releases V7",
+    "tag": "generation",
+    "why": "10x faster Draft Mode, automatic personalization from first use",
+    "impact": "Instant style learning, perfect anatomy/hands/objects, professional quality at 2x speed",
+    "next": "Video generation, API access, collaborative editing features",
+    "announcement": "https://www.midjourney.com/updates",
+    "docs": "https://docs.midjourney.com/hc/en-us/articles/32199405667853-Version"
   },
   {
     "date": "2025-04-09",
@@ -70,13 +150,73 @@
     "docs": "https://google.github.io/A2A/#/"
   },
   {
-    "date": "2025-03-26",
-    "title": "Model Context Protocol v1.0 ships",
-    "tag": "protocol",
-    "why": "Unified way to stream context & tools to LLMs",
-    "impact": "Bridges editors, browsers, servers with AI",
-    "next": "Integration into NLWeb endpoints by default",
-    "announcement": "https://github.com/modelcontextprotocol",
-    "docs": "https://github.com/modelcontextprotocol/mcp"
+    "date": "2025-04-16",
+    "title": "OpenAI launches Codex CLI",
+    "tag": "cli_tool",
+    "why": "Local, natural‑language terminal coding with approval modes",
+    "impact": "Open‑source CLI agent enabling local AI‑powered coding workflows",
+    "next": "Support GPT‑4.1/model expansion, community contributions",
+    "announcement": "https://ai2sql.io/openai-codex-cli-announcement",
+    "docs": "https://github.com/openai/codex"
+  },
+  {
+    "date": "2025-05-19",
+    "title": "Microsoft unveils NLWeb at Build 2025",
+    "tag": "web",
+    "why": "Open protocol for on‑site natural‑language search",
+    "impact": "Decentralises AI UX; every site can host its own chatbot",
+    "next": "Early pilots on TripAdvisor, Shopify by June",
+    "announcement": "https://news.microsoft.com/source/features/company-news/introducing-nlweb-bringing-conversational-interfaces-directly-to-the-web/",
+    "docs": "https://github.com/microsoft/NLWeb"
+  },
+  {
+    "date": "2025-05-21",
+    "title": "Google unveils Gemini Diffusion at I/O 2025",
+    "tag": "model",
+    "why": "First diffusion language model achieving commercial-grade parity; parallel token generation",
+    "impact": "1,479 tokens/sec (5x faster); generates entire text blocks simultaneously; landmark moment ending autoregressive dominance",
+    "next": "Challenge GPT/Claude architecture, hybrid models, high-throughput applications",
+    "announcement": "https://blog.google/technology/google-deepmind/gemini-diffusion/",
+    "docs": "https://deepmind.google/models/gemini-diffusion/"
+  },
+  {
+    "date": "2025-05-22",
+    "title": "Anthropic launches Claude 4 (Opus & Sonnet)",
+    "tag": "model",
+    "why": "Improved coding & multitool reasoning",
+    "impact": "Raises bar for developer‑oriented agents",
+    "next": "Watch IDE plugins & long‑run agent demos",
+    "announcement": "https://www.anthropic.com/news/claude-4",
+    "docs": "https://docs.anthropic.com/en/home"
+  },
+  {
+    "date": "2025-05-14",
+    "title": "Google launches Veo 3 video generation",
+    "tag": "generation",
+    "why": "Native audio+video generation in 76 languages without separate pipeline",
+    "impact": "True multimodal content creation; unified generation model",
+    "next": "API access, longer videos, real-time generation",
+    "announcement": "https://blog.google/technology/google-deepmind/google-veo-3/",
+    "docs": "https://deepmind.google/technologies/veo/"
+  },
+  {
+    "date": "2025-06-25",
+    "title": "Google unveils Gemini CLI",
+    "tag": "cli_tool",
+    "why": "Open‑source AI agent with Gemini 2.5 Pro in terminals",
+    "impact": "Largest token context (1 M tokens), integrated MCP, media generation support",
+    "next": "Preview expansions, community growth, deeper IDE/terminal sync",
+    "announcement": "https://blog.google/technology/developers/introducing-gemini-cli-open-source-ai-agent/",
+    "docs": "https://github.com/google-gemini/gemini-cli"
+  },
+  {
+    "date": "2025-07-23",
+    "title": "Meta releases Llama 4 Scout with 10M token context",
+    "tag": "model",
+    "why": "10 million token context window enables entire codebases in single request",
+    "impact": "Context scale breakthrough; analyze full repositories, books, datasets",
+    "next": "Expand to other Llama 4 variants, optimize memory efficiency",
+    "announcement": "https://ai.meta.com/blog/llama-4/",
+    "docs": "https://llama.meta.com/"
   }
-] 
+]
