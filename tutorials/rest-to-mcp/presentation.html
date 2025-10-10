@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REST → MCP: Architecture Transformation Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        rest: '#3b82f6',
+                        mcp: '#8b5cf6',
+                        transform: '#10b981'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        code, pre {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .sticky-nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .comparison-card {
+            transition: all 0.3s ease;
+        }
+
+        .comparison-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .code-block {
+            position: relative;
+        }
+
+        .code-label {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+        }
+
+        .transform-arrow {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+
+    <!-- Header -->
+    <header class="sticky-nav bg-gradient-to-r from-rest via-purple-500 to-mcp text-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <h1 class="text-4xl font-bold">REST → MCP Transformation</h1>
+            <p class="text-xl mt-2 text-gray-100">Understanding the Architectural Shift from Human APIs to AI-Native Servers</p>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="sticky-nav top-0 bg-white border-b border-gray-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex space-x-8 overflow-x-auto py-3">
+                <a href="#goal" class="whitespace-nowrap text-sm font-medium text-gray-700 hover:text-rest">🎯 Goal</a>
+                <a href="#architecture" class="whitespace-nowrap text-sm font-medium text-gray-700 hover:text-rest">🧱 Architecture</a>
+                <a href="#files" class="whitespace-nowrap text-sm font-medium text-gray-700 hover:text-rest">📁 Files</a>
+                <a href="#code" class="whitespace-nowrap text-sm font-medium text-gray-700 hover:text-rest">⚙️ Code</a>
+                <a href="#mapping" class="whitespace-nowrap text-sm font-medium text-gray-700 hover:text-rest">🧠 Mapping</a>
+                <a href="#tradeoffs" class="whitespace-nowrap text-sm font-medium text-gray-700 hover:text-rest">⚖️ Trade-offs</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+
+        <!-- Goal Section -->
+        <section id="goal" class="scroll-mt-24">
+            <div class="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-8 border border-gray-200">
+                <h2 class="text-3xl font-bold mb-6 flex items-center">
+                    <span class="text-4xl mr-3">🧩</span>
+                    High-Level Goal
+                </h2>
+                <div class="prose prose-lg max-w-none">
+                    <p class="text-xl text-gray-700 leading-relaxed">
+                        You're not just exposing <span class="font-semibold text-rest">endpoints</span> anymore —
+                        you're exposing <span class="font-semibold text-mcp">"capabilities"</span> that an LLM can
+                        <em>invoke, inspect, and reason about</em> within an ongoing session.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Architecture Comparison -->
+        <section id="architecture" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold mb-8 flex items-center">
+                <span class="text-4xl mr-3">🧱</span>
+                Side-by-Side Architecture Map
+            </h2>
+
+            <div class="overflow-x-auto">
+                <table class="w-full bg-white rounded-lg shadow-lg overflow-hidden">
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">Layer</th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold text-rest">REST API (Stateless)</th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold text-mcp">MCP Server (Stateful)</th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold text-transform">Δ Transformation</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-6 py-4 font-medium text-gray-900">Entry Point</td>
+                            <td class="px-6 py-4 text-sm text-gray-700"><code class="bg-rest/10 px-2 py-1 rounded">main.py</code> runs HTTP server</td>
+                            <td class="px-6 py-4 text-sm text-gray-700"><code class="bg-mcp/10 px-2 py-1 rounded">server.py</code> runs message loop</td>
+                            <td class="px-6 py-4 text-sm text-transform">🔁 Replace request/response with message dispatch</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-6 py-4 font-medium text-gray-900">Router</td>
+                            <td class="px-6 py-4 text-sm text-gray-700"><code class="bg-rest/10 px-2 py-1 rounded">@app.route("/path")</code></td>
+                            <td class="px-6 py-4 text-sm text-gray-700"><code class="bg-mcp/10 px-2 py-1 rounded">@mcp.tool()</code></td>
+                            <td class="px-6 py-4 text-sm text-transform">🔁 Path routing → tool routing</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-6 py-4 font-medium text-gray-900">Transport</td>
+                            <td class="px-6 py-4 text-sm text-gray-700">HTTP verbs + routes</td>
+                            <td class="px-6 py-4 text-sm text-gray-700">JSON-RPC methods</td>
+                            <td class="px-6 py-4 text-sm text-transform">➕ Session persists; multi-step interactions</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-6 py-4 font-medium text-gray-900">Schema</td>
+                            <td class="px-6 py-4 text-sm text-gray-700">OpenAPI / code docs</td>
+                            <td class="px-6 py-4 text-sm text-gray-700">Auto-extracted from type hints</td>
+                            <td class="px-6 py-4 text-sm text-transform">➕ Machine-readable for LLMs</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-6 py-4 font-medium text-gray-900">Context</td>
+                            <td class="px-6 py-4 text-sm text-gray-700">Each request new (no memory)</td>
+                            <td class="px-6 py-4 text-sm text-gray-700">Shared context across invocations</td>
+                            <td class="px-6 py-4 text-sm text-transform">➕ Stateful (cache, auth, session)</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-6 py-4 font-medium text-gray-900">Discovery</td>
+                            <td class="px-6 py-4 text-sm text-gray-700">Humans read <code>/docs</code></td>
+                            <td class="px-6 py-4 text-sm text-gray-700">LLM queries <code>list_tools</code></td>
+                            <td class="px-6 py-4 text-sm text-transform">➕ Self-discoverable</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-6 py-4 font-medium text-gray-900">Client</td>
+                            <td class="px-6 py-4 text-sm text-gray-700">Browser, mobile app</td>
+                            <td class="px-6 py-4 text-sm text-gray-700">LLM / AI Agent</td>
+                            <td class="px-6 py-4 text-sm text-transform">⚡️ Programmatic reasoning</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- File Structure Comparison -->
+        <section id="files" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold mb-8 flex items-center">
+                <span class="text-4xl mr-3">📁</span>
+                File Structure Transformation
+            </h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- REST Structure -->
+                <div class="comparison-card bg-white rounded-xl shadow-lg p-6 border-2 border-rest/20">
+                    <div class="flex items-center mb-4">
+                        <div class="w-3 h-3 rounded-full bg-rest mr-2"></div>
+                        <h3 class="text-xl font-bold text-rest">REST API — Classic Layout</h3>
+                    </div>
+                    <pre class="bg-gray-900 text-gray-100 rounded-lg p-4 overflow-x-auto text-sm"><code>api_server/
+├── main.py           # HTTP server
+├── routes/
+│   ├── users.py      # @app.route('/users')
+│   └── orders.py
+├── models/
+│   ├── user_model.py
+│   └── order_model.py
+├── services/
+│   ├── db_service.py
+│   └── cache_service.py
+└── utils/
+    ├── auth.py
+    └── error_handlers.py</code></pre>
+                </div>
+
+                <!-- MCP Structure -->
+                <div class="comparison-card bg-white rounded-xl shadow-lg p-6 border-2 border-mcp/20">
+                    <div class="flex items-center mb-4">
+                        <div class="w-3 h-3 rounded-full bg-mcp mr-2"></div>
+                        <h3 class="text-xl font-bold text-mcp">MCP Server — Transformed Layout</h3>
+                    </div>
+                    <pre class="bg-gray-900 text-gray-100 rounded-lg p-4 overflow-x-auto text-sm"><code>mcp_server/
+├── server.py         # Message loop (stdio/ws)
+├── tools/
+│   ├── users.py      # @mcp.tool() get_user(id)
+│   └── orders.py     # @mcp.tool() create_order()
+├── resources/
+│   ├── user://{id}   # dynamic URI resource
+│   └── inventory://{sku}
+├── schema/
+│   └── generated.json # JSON-Schema
+├── context/
+│   ├── state.py      # Session context store
+│   └── memory.py     # Persistent across calls
+└── transports/
+    ├── stdio.py
+    └── websocket.py</code></pre>
+                </div>
+            </div>
+
+            <!-- Transformation Notes -->
+            <div class="mt-6 bg-transform/10 border-l-4 border-transform rounded-r-lg p-6">
+                <h4 class="font-bold text-transform mb-3 text-lg">🧭 Key Transformations:</h4>
+                <ul class="space-y-2 text-gray-700">
+                    <li class="flex items-start">
+                        <span class="text-transform mr-2">→</span>
+                        <span><code class="bg-rest/10 px-2 py-1 rounded text-sm">/routes</code> becomes <code class="bg-mcp/10 px-2 py-1 rounded text-sm">/tools</code></span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-transform mr-2">→</span>
+                        <span><code class="bg-rest/10 px-2 py-1 rounded text-sm">/models</code> becomes <code class="bg-mcp/10 px-2 py-1 rounded text-sm">/resources</code> (conceptual entities)</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-transform mr-2">→</span>
+                        <span><code class="bg-rest/10 px-2 py-1 rounded text-sm">/services</code> remain same (but injected into context)</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-transform mr-2">+</span>
+                        <span><code class="bg-mcp/10 px-2 py-1 rounded text-sm">/context</code> added (state/session layer)</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Code Transformation Examples -->
+        <section id="code" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold mb-8 flex items-center">
+                <span class="text-4xl mr-3">⚙️</span>
+                Internal Code Transformation
+            </h2>
+
+            <!-- Example 1: Basic Handler -->
+            <div class="space-y-8">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="bg-gray-100 px-6 py-3 border-b border-gray-200">
+                        <h3 class="font-bold text-lg">Example 1: Basic Addition Handler</h3>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 divide-y lg:divide-y-0 lg:divide-x divide-gray-200">
+                        <!-- REST -->
+                        <div class="p-6">
+                            <div class="flex items-center mb-3">
+                                <div class="w-2 h-2 rounded-full bg-rest mr-2"></div>
+                                <span class="font-semibold text-rest">REST API (Flask)</span>
+                            </div>
+                            <pre class="bg-gray-900 text-gray-100 rounded-lg p-4 overflow-x-auto text-sm"><code class="language-python">@app.route("/add", methods=["POST"])
+def add():
+    data = request.json
+    result = data["a"] + data["b"]
+    return jsonify({"result": result})</code></pre>
+                        </div>
+                        <!-- MCP -->
+                        <div class="p-6">
+                            <div class="flex items-center mb-3">
+                                <div class="w-2 h-2 rounded-full bg-mcp mr-2"></div>
+                                <span class="font-semibold text-mcp">MCP Server</span>
+                            </div>
+                            <pre class="bg-gray-900 text-gray-100 rounded-lg p-4 overflow-x-auto text-sm"><code class="language-python">@mcp.tool()
+async def add(a: int, b: int) -> int:
+    return a + b</code></pre>
+                        </div>
+                    </div>
+                    <div class="bg-transform/10 px-6 py-4 border-t border-gray-200">
+                        <p class="text-sm text-gray-700">
+                            <strong class="text-transform">Key difference:</strong>
+                            MCP uses <strong>tool name + schema</strong> routing instead of path + method.
+                            Input/output validation comes from type hints automatically.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Example 2: Context Handling -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="bg-gray-100 px-6 py-3 border-b border-gray-200">
+                        <h3 class="font-bold text-lg">Example 2: Stateful Context Handling</h3>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 divide-y lg:divide-y-0 lg:divide-x divide-gray-200">
+                        <!-- REST -->
+                        <div class="p-6">
+                            <div class="flex items-center mb-3">
+                                <div class="w-2 h-2 rounded-full bg-rest mr-2"></div>
+                                <span class="font-semibold text-rest">REST (Stateless)</span>
+                            </div>
+                            <pre class="bg-gray-900 text-gray-100 rounded-lg p-4 overflow-x-auto text-sm"><code class="language-python">@app.route("/cart", methods=["POST"])
+def add_to_cart():
+    user = request.headers["User"]
+    cart = db.get_cart(user)
+    cart.add(request.json["item"])
+    db.save_cart(cart)
+    return jsonify({"message": "ok"})</code></pre>
+                        </div>
+                        <!-- MCP -->
+                        <div class="p-6">
+                            <div class="flex items-center mb-3">
+                                <div class="w-2 h-2 rounded-full bg-mcp mr-2"></div>
+                                <span class="font-semibold text-mcp">MCP (Stateful)</span>
+                            </div>
+                            <pre class="bg-gray-900 text-gray-100 rounded-lg p-4 overflow-x-auto text-sm"><code class="language-python">@mcp.tool()
+def add_to_cart(ctx: Context, item: str):
+    cart = ctx.session.get("cart", [])
+    cart.append(item)
+    ctx.session["cart"] = cart
+    return {"cart_size": len(cart)}</code></pre>
+                        </div>
+                    </div>
+                    <div class="bg-transform/10 px-6 py-4 border-t border-gray-200">
+                        <p class="text-sm text-gray-700">
+                            <strong class="text-transform">Δ Transformation:</strong>
+                            Session is <strong>in-memory</strong>, persists across tool invocations — useful for reasoning and chaining.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mapping Table -->
+        <section id="mapping" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold mb-8 flex items-center">
+                <span class="text-4xl mr-3">🧠</span>
+                REST → MCP Concept Mapping
+            </h2>
+
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                <table class="w-full">
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">REST Concept</th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">MCP Equivalent</th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">Remarks</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 font-mono text-sm text-rest">Route</td>
+                            <td class="px-6 py-4 font-mono text-sm text-mcp">Tool</td>
+                            <td class="px-6 py-4 text-sm text-gray-700">Invokable function, schema-aware</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 font-mono text-sm text-rest">GET /resource/:id</td>
+                            <td class="px-6 py-4 font-mono text-sm text-mcp">read_resource("uri")</td>
+                            <td class="px-6 py-4 text-sm text-gray-700">Accesses a resource handler</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 font-mono text-sm text-rest">POST /data</td>
+                            <td class="px-6 py-4 font-mono text-sm text-mcp">invoke_tool("tool_name")</td>
+                            <td class="px-6 py-4 text-sm text-gray-700">Calls a capability</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 font-mono text-sm text-rest">Request.headers</td>
+                            <td class="px-6 py-4 font-mono text-sm text-mcp">Context.session</td>
+                            <td class="px-6 py-4 text-sm text-gray-700">Holds user/session info</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 font-mono text-sm text-rest">Middleware</td>
+                            <td class="px-6 py-4 font-mono text-sm text-mcp">Hook / Lifespan</td>
+                            <td class="px-6 py-4 text-sm text-gray-700">Pre/post invocation wrappers</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 font-mono text-sm text-rest">OpenAPI</td>
+                            <td class="px-6 py-4 font-mono text-sm text-mcp">MCP Schema</td>
+                            <td class="px-6 py-4 text-sm text-gray-700">Generated from annotations</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 font-mono text-sm text-rest">404</td>
+                            <td class="px-6 py-4 font-mono text-sm text-mcp">Error.code=32001</td>
+                            <td class="px-6 py-4 text-sm text-gray-700">JSON-RPC error variant</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Trade-offs -->
+        <section id="tradeoffs" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold mb-8 flex items-center">
+                <span class="text-4xl mr-3">⚖️</span>
+                Summary of Trade-offs
+            </h2>
+
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                <table class="w-full">
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">Aspect</th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold text-rest">REST (+)</th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold text-mcp">MCP (+)</th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">Comment</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 font-medium">Simplicity</td>
+                            <td class="px-6 py-4 text-green-600">✅ Very simple</td>
+                            <td class="px-6 py-4 text-yellow-600">⚠️ More complex</td>
+                            <td class="px-6 py-4 text-sm text-gray-700">REST easier for humans</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 font-medium">AI Integrability</td>
+                            <td class="px-6 py-4 text-red-600">❌ Hard (needs wrapper)</td>
+                            <td class="px-6 py-4 text-green-600">✅ Native</td>
+                            <td class="px-6 py-4 text-sm text-gray-700">MCP made for LLMs</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 font-medium">State</td>
+                            <td class="px-6 py-4 text-red-600">❌ Stateless</td>
+                            <td class="px-6 py-4 text-green-600">✅ Stateful</td>
+                            <td class="px-6 py-4 text-sm text-gray-700">Enables tool chaining</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 font-medium">Discoverability</td>
+                            <td class="px-6 py-4 text-yellow-600">🧍 Manual docs</td>
+                            <td class="px-6 py-4 text-green-600">🤖 Auto via list_tools</td>
+                            <td class="px-6 py-4 text-sm text-gray-700">Self-describe</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 font-medium">Security</td>
+                            <td class="px-6 py-4 text-green-600">Mature</td>
+                            <td class="px-6 py-4 text-yellow-600">Evolving</td>
+                            <td class="px-6 py-4 text-sm text-gray-700">Requires trust boundary design</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 font-medium">Performance</td>
+                            <td class="px-6 py-4 text-green-600">High (HTTP optimized)</td>
+                            <td class="px-6 py-4 text-yellow-600">Medium (RPC overhead)</td>
+                            <td class="px-6 py-4 text-sm text-gray-700">But fine for tool calls</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 font-medium">Purpose</td>
+                            <td class="px-6 py-4">Web & API apps</td>
+                            <td class="px-6 py-4">AI orchestration</td>
+                            <td class="px-6 py-4 text-sm text-gray-700">Complementary layers</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Big Picture -->
+        <section class="scroll-mt-24">
+            <div class="bg-gradient-to-br from-purple-50 to-blue-50 rounded-2xl p-8 border border-gray-200">
+                <h2 class="text-3xl font-bold mb-6 flex items-center">
+                    <span class="text-4xl mr-3">🧭</span>
+                    Big Picture
+                </h2>
+                <div class="space-y-4">
+                    <p class="text-lg text-gray-700 leading-relaxed">
+                        MCP doesn't replace REST; it <strong>wraps or extends</strong> it — turning traditional endpoints into
+                        <em>introspectable, schema-aware, conversational tools</em>.
+                    </p>
+                    <blockquote class="border-l-4 border-mcp pl-6 py-4 bg-white rounded-r-lg">
+                        <p class="text-xl font-medium text-gray-800 italic">
+                            "An RPC façade for LLMs, sitting on top of APIs that were originally built for humans."
+                        </p>
+                    </blockquote>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="text-center">
+                <p class="text-sm">
+                    This guide demonstrates the architectural transformation from REST APIs to MCP Servers.
+                    <br>
+                    Built with Tailwind CSS • Generated with pedagogical insights
+                </p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
