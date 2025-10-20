@@ -10,54 +10,119 @@
             theme: {
                 extend: {
                     colors: {
-                        prompt: '#3b82f6',
-                        production: '#10b981',
-                        volatile: '#f59e0b',
-                        reliable: '#059669'
+                        prompt: '#4a5568',
+                        production: '#2f855a',
+                        volatile: '#d69e2e',
+                        reliable: '#38a169',
+                        paper: '#fefefe',
+                        ink: '#2d3748',
+                        'ink-light': '#4a5568',
+                        cream: '#fffef7',
+                        'warm-gray': '#f7f6f3'
                     }
                 }
             }
         }
     </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap');
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 18px;
+            line-height: 1.7;
+            letter-spacing: 0.01em;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Crimson Text', Georgia, serif;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        h1 { font-size: 2.5rem; }
+        h2 { font-size: 2rem; }
+        h3 { font-size: 1.5rem; }
+        h4 { font-size: 1.25rem; }
+        h5 { font-size: 1.125rem; }
+        h6 { font-size: 1rem; }
+
+        p {
+            font-size: 18px;
+            margin-bottom: 1.25rem;
+        }
+
+        li {
+            font-size: 17px;
+            margin-bottom: 0.5rem;
+        }
+
+        h1 { font-size: 2.5rem; }
+        h2 { font-size: 2rem; }
+        h3 { font-size: 1.5rem; }
+        h4 { font-size: 1.25rem; }
+
+        p {
+            margin-bottom: 1.25rem;
+            line-height: 1.8;
         }
 
         code, pre {
-            font-family: 'JetBrains Mono', monospace;
+            font-family: 'Fira Code', 'JetBrains Mono', monospace;
         }
 
         .sticky-nav {
             position: sticky;
             top: 0;
             z-index: 50;
+            backdrop-filter: blur(8px);
         }
 
         .section-card {
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #fefefe;
+            border: 1px solid rgba(45, 55, 72, 0.08);
         }
 
         .section-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            transform: translateY(-3px) rotate(0.2deg);
+            box-shadow: 0 12px 32px -8px rgba(45, 55, 72, 0.15), 0 0 0 1px rgba(45, 55, 72, 0.05);
         }
 
         .highlight-box {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+            color: #f7fafc;
+            border-radius: 16px;
+            position: relative;
+        }
+
+        .highlight-box::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(
+                90deg,
+                transparent,
+                transparent 98px,
+                rgba(255, 255, 255, 0.02) 100px
+            );
+            border-radius: 16px;
         }
 
         .code-block {
             position: relative;
+            background: #2d3748;
+            border-radius: 12px;
+            border: 1px solid rgba(74, 85, 104, 0.2);
+            box-shadow: 0 4px 12px rgba(45, 55, 72, 0.15);
         }
 
         .table-container {
             overflow-x: auto;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border-radius: 16px;
+            box-shadow: 0 8px 24px -8px rgba(45, 55, 72, 0.15);
+            border: 2px solid rgba(45, 55, 72, 0.06);
+            background: #fefefe;
         }
 
         .metric-badge {
@@ -69,9 +134,21 @@
         }
 
         .phase-step {
-            border-left: 4px solid #3b82f6;
-            padding-left: 1rem;
-            margin-bottom: 1rem;
+            border-left: 4px solid #4a5568;
+            padding-left: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .phase-step::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 0.25rem;
+            width: 8px;
+            height: 8px;
+            background: #4a5568;
+            border-radius: 50%;
         }
 
         .works-cited {
@@ -90,53 +167,73 @@
 
         .toc-link {
             display: block;
-            padding: 0.5rem 1rem;
+            padding: 0.75rem 1.25rem;
             text-decoration: none;
-            color: #374151;
-            border-radius: 0.5rem;
-            transition: all 0.2s ease;
+            color: #4a5568;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 500;
         }
 
         .toc-link:hover {
-            background-color: #f3f4f6;
-            color: #3b82f6;
+            background: rgba(74, 85, 104, 0.08);
+            color: #2d3748;
+            transform: translateY(-1px);
         }
 
         .progress-indicator {
             position: fixed;
             top: 0;
             left: 0;
-            height: 4px;
-            background: linear-gradient(to right, #3b82f6, #10b981);
+            height: 3px;
+            background: linear-gradient(to right, #4a5568, #2f855a, #d69e2e);
             z-index: 100;
-            transition: width 0.2s ease;
+            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 8px rgba(74, 85, 104, 0.3);
+        }
+
+        /* Paper-like texture background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 25px 25px, rgba(45, 55, 72, 0.01) 1px, transparent 1px),
+                radial-gradient(circle at 75px 75px, rgba(45, 55, 72, 0.008) 1px, transparent 1px);
+            background-size: 100px 100px, 150px 150px;
+            pointer-events: none;
+            z-index: -1;
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-900">
+<body class="text-ink" style="background-color: #fffef7;">
     <!-- Progress Indicator -->
     <div id="progress" class="progress-indicator" style="width: 0%"></div>
 
     <!-- Header -->
-    <header class="bg-gradient-to-r from-prompt via-blue-600 to-production text-white shadow-lg">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <h1 class="text-4xl md:text-5xl font-bold leading-tight">
+    <header class="relative" style="background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%); color: #f7fafc;">
+        <div class="absolute inset-0 opacity-5" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255,255,255,0.1) 2px, rgba(255,255,255,0.1) 4px);"></div>
+        <div class="relative max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-16">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl leading-tight mb-6" style="color: #f7fafc; text-shadow: 0 2px 4px rgba(0,0,0,0.1);">
                 The Developer's Guide to Production-Grade Prompt Management
             </h1>
-            <p class="text-xl mt-4 text-blue-100">From Volatility to Reliability</p>
-            <div class="mt-6 flex flex-wrap gap-3">
-                <span class="bg-white/20 px-3 py-1 rounded-full text-sm">Engineering Discipline</span>
-                <span class="bg-white/20 px-3 py-1 rounded-full text-sm">LLM Operations</span>
-                <span class="bg-white/20 px-3 py-1 rounded-full text-sm">Production Systems</span>
-                <span class="bg-white/20 px-3 py-1 rounded-full text-sm">Prompt Engineering</span>
+            <p class="text-xl md:text-2xl mb-8 opacity-90 italic">From Volatility to Reliability</p>
+            <div class="flex flex-wrap gap-3">
+                <span class="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg text-sm border border-white/20">Engineering Discipline</span>
+                <span class="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg text-sm border border-white/20">LLM Operations</span>
+                <span class="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg text-sm border border-white/20">Production Systems</span>
+                <span class="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg text-sm border border-white/20">Prompt Engineering</span>
             </div>
         </div>
     </header>
 
     <!-- Navigation -->
-    <nav class="sticky-nav bg-white border-b border-gray-200 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex space-x-8 overflow-x-auto py-3">
+    <nav class="sticky-nav" style="background: rgba(255, 254, 247, 0.85); border-bottom: 2px solid rgba(45, 55, 72, 0.1); box-shadow: 0 4px 16px -4px rgba(45, 55, 72, 0.1);">
+        <div class="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
+            <div class="flex space-x-6 overflow-x-auto py-4">
                 <a href="#introduction" class="toc-link whitespace-nowrap">🚀 Introduction</a>
                 <a href="#foundations" class="toc-link whitespace-nowrap">🎯 Foundations</a>
                 <a href="#engineering" class="toc-link whitespace-nowrap">⚙️ Engineering</a>
@@ -148,7 +245,7 @@
         </div>
     </nav>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+    <main class="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 py-16 space-y-20">
 
         <!-- Introduction Section -->
         <section id="introduction" class="scroll-mt-24">
@@ -171,44 +268,44 @@
 
             <div class="grid md:grid-cols-2 gap-8 mb-8">
                 <div class="section-card bg-white rounded-xl shadow-lg p-6">
-                    <h3 class="text-xl font-bold mb-4 text-volatile">⚠️ Why Large Prompts Break</h3>
+                    <h3 class="text-xl font-bold mb-4" style="color: #d69e2e;">⚠️ Why Large Prompts Break</h3>
                     <ul class="space-y-3 text-gray-700">
                         <li class="flex items-start">
-                            <span class="text-volatile mr-2">•</span>
+                            <span style="color: #d69e2e;" class="mr-2">•</span>
                             <span><strong>Stochastic Nature:</strong> LLMs are fundamentally statistical, generating responses by predicting token probabilities</span>
                         </li>
                         <li class="flex items-start">
-                            <span class="text-volatile mr-2">•</span>
+                            <span style="color: #d69e2e;" class="mr-2">•</span>
                             <span><strong>Prompt Brittleness:</strong> Performance regression over silent API updates</span>
                         </li>
                         <li class="flex items-start">
-                            <span class="text-volatile mr-2">•</span>
+                            <span style="color: #d69e2e;" class="mr-2">•</span>
                             <span><strong>Cross-Model Incompatibility:</strong> Different models exhibit distinct behaviors and biases</span>
                         </li>
                         <li class="flex items-start">
-                            <span class="text-volatile mr-2">•</span>
+                            <span style="color: #d69e2e;" class="mr-2">•</span>
                             <span><strong>Instruction Neglect:</strong> Models struggle with many simultaneous constraints</span>
                         </li>
                     </ul>
                 </div>
 
                 <div class="section-card bg-white rounded-xl shadow-lg p-6">
-                    <h3 class="text-xl font-bold mb-4 text-reliable">✅ The Paradigm Shift</h3>
+                    <h3 class="text-xl font-bold mb-4" style="color: #38a169;">✅ The Paradigm Shift</h3>
                     <ul class="space-y-3 text-gray-700">
                         <li class="flex items-start">
-                            <span class="text-reliable mr-2">•</span>
+                            <span style="color: #38a169;" class="mr-2">•</span>
                             <span><strong>From Prompt Crafting:</strong> Finding the right words and phrases</span>
                         </li>
                         <li class="flex items-start">
-                            <span class="text-reliable mr-2">•</span>
+                            <span style="color: #38a169;" class="mr-2">•</span>
                             <span><strong>To Systems Engineering:</strong> Building reliable systems for context management</span>
                         </li>
                         <li class="flex items-start">
-                            <span class="text-reliable mr-2">•</span>
+                            <span style="color: #38a169;" class="mr-2">•</span>
                             <span><strong>Context Engineering:</strong> Managing entire information payload</span>
                         </li>
                         <li class="flex items-start">
-                            <span class="text-reliable mr-2">•</span>
+                            <span style="color: #38a169;" class="mr-2">•</span>
                             <span><strong>PromptOps:</strong> Lifecycle management like application code</span>
                         </li>
                     </ul>
@@ -224,13 +321,13 @@
             </h2>
 
             <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
-                <h3 class="text-2xl font-bold mb-6 text-prompt">Beyond "Be Specific": Advanced Structural Techniques</h3>
+                <h3 class="text-2xl font-bold mb-6" style="color: #4a5568;">Beyond "Be Specific": Advanced Structural Techniques</h3>
                 
                 <div class="grid md:grid-cols-3 gap-6 mb-8">
                     <div class="bg-blue-50 rounded-lg p-6">
                         <h4 class="font-bold text-prompt mb-3">Clear Delimiters</h4>
-                        <p class="text-sm text-gray-700 mb-3">Use explicit boundaries to partition prompts:</p>
-                        <div class="bg-gray-900 text-gray-100 rounded p-3 text-xs">
+                        <p class="text-base text-gray-700 mb-3">Use explicit boundaries to partition prompts:</p>
+                        <div class="bg-gray-900 text-gray-100 rounded p-3 text-sm">
                             <code>```instructions```<br/>
 &lt;context&gt;...&lt;/context&gt;<br/>
 ### Instructions</code>
@@ -239,8 +336,8 @@
 
                     <div class="bg-green-50 rounded-lg p-6">
                         <h4 class="font-bold text-production mb-3">Structured Output</h4>
-                        <p class="text-sm text-gray-700 mb-3">Leverage data-centric formats:</p>
-                        <div class="bg-gray-900 text-gray-100 rounded p-3 text-xs">
+                        <p class="text-base text-gray-700 mb-3">Leverage data-centric formats:</p>
+                        <div class="bg-gray-900 text-gray-100 rounded p-3 text-sm">
                             <code>{<br/>
   "summary": "...",<br/>
   "confidence": 0.85<br/>
@@ -250,8 +347,8 @@
 
                     <div class="bg-purple-50 rounded-lg p-6">
                         <h4 class="font-bold text-violet-600 mb-3">Role Assignment</h4>
-                        <p class="text-sm text-gray-700 mb-3">Anchor behavior with personas:</p>
-                        <div class="bg-gray-900 text-gray-100 rounded p-3 text-xs">
+                        <p class="text-base text-gray-700 mb-3">Anchor behavior with personas:</p>
+                        <div class="bg-gray-900 text-gray-100 rounded p-3 text-sm">
                             <code>"You are an expert cybersecurity analyst..."</code>
                         </div>
                     </div>
@@ -280,13 +377,13 @@
             <div class="space-y-8">
                 <!-- Decoupling Strategies -->
                 <div class="bg-white rounded-xl shadow-lg p-8">
-                    <h3 class="text-2xl font-bold mb-6 text-prompt">Decoupling Prompts from Application Code</h3>
+                    <h3 class="text-2xl font-bold mb-6" style="color: #4a5568;">Decoupling Prompts from Application Code</h3>
                     
                     <div class="grid md:grid-cols-3 gap-6">
                         <div class="bg-blue-50 rounded-lg p-6">
                             <h4 class="font-bold text-blue-600 mb-3">📄 Configuration Files</h4>
-                            <p class="text-sm text-gray-700 mb-3">Store prompts in JSON/YAML</p>
-                            <ul class="text-xs text-gray-600 space-y-1">
+                            <p class="text-base text-gray-700 mb-3">Store prompts in JSON/YAML</p>
+                            <ul class="text-sm text-gray-600 space-y-1">
                                 <li>• Immediate separation</li>
                                 <li>• Git versioning</li>
                                 <li>• Non-technical editing</li>
@@ -295,8 +392,8 @@
 
                         <div class="bg-green-50 rounded-lg p-6">
                             <h4 class="font-bold text-green-600 mb-3">🗄️ Database Storage</h4>
-                            <p class="text-sm text-gray-700 mb-3">Dynamic updates via API</p>
-                            <ul class="text-xs text-gray-600 space-y-1">
+                            <p class="text-base text-gray-700 mb-3">Dynamic updates via API</p>
+                            <ul class="text-sm text-gray-600 space-y-1">
                                 <li>• Real-time updates</li>
                                 <li>• Rich metadata</li>
                                 <li>• Access control</li>
@@ -305,8 +402,8 @@
 
                         <div class="bg-purple-50 rounded-lg p-6">
                             <h4 class="font-bold text-purple-600 mb-3">🏗️ Management Services</h4>
-                            <p class="text-sm text-gray-700 mb-3">Purpose-built platforms</p>
-                            <ul class="text-xs text-gray-600 space-y-1">
+                            <p class="text-base text-gray-700 mb-3">Purpose-built platforms</p>
+                            <ul class="text-sm text-gray-600 space-y-1">
                                 <li>• Runtime control</li>
                                 <li>• A/B testing</li>
                                 <li>• Gradual rollouts</li>
@@ -317,7 +414,7 @@
 
                 <!-- Modular Architecture -->
                 <div class="bg-white rounded-xl shadow-lg p-8">
-                    <h3 class="text-2xl font-bold mb-6 text-production">From Monoliths to Modules</h3>
+                    <h3 class="text-2xl font-bold mb-6" style="color: #2f855a;">From Monoliths to Modules</h3>
                     
                     <div class="bg-gray-100 rounded-lg p-6 mb-6">
                         <h4 class="font-bold mb-4">🏗️ Modular Monolith Pattern for Prompts</h4>
@@ -325,17 +422,17 @@
                             Instead of a single massive prompt, design a "prompt container" with well-defined, 
                             independent modules with clear boundaries.
                         </p>
-                        <div class="grid md:grid-cols-4 gap-4 text-sm">
-                            <div class="bg-blue-100 p-3 rounded">
+                        <div class="grid md:grid-cols-4 gap-4 text-base">
+                            <div class="bg-blue-100 p-4 rounded">
                                 <strong>&lt;persona_module&gt;</strong>
                             </div>
-                            <div class="bg-green-100 p-3 rounded">
+                            <div class="bg-green-100 p-4 rounded">
                                 <strong>&lt;instructions_module&gt;</strong>
                             </div>
-                            <div class="bg-yellow-100 p-3 rounded">
+                            <div class="bg-yellow-100 p-4 rounded">
                                 <strong>&lt;examples_module&gt;</strong>
                             </div>
-                            <div class="bg-purple-100 p-3 rounded">
+                            <div class="bg-purple-100 p-4 rounded">
                                 <strong>&lt;output_format_module&gt;</strong>
                             </div>
                         </div>
@@ -344,17 +441,17 @@
                     <div class="grid md:grid-cols-3 gap-6">
                         <div class="bg-blue-50 rounded-lg p-6">
                             <h4 class="font-bold text-blue-600 mb-3">🔧 Prompt Templating</h4>
-                            <p class="text-sm text-gray-700">Separate static framework from dynamic data using Jinja2</p>
+                            <p class="text-base text-gray-700">Separate static framework from dynamic data using Jinja2</p>
                         </div>
 
                         <div class="bg-green-50 rounded-lg p-6">
                             <h4 class="font-bold text-green-600 mb-3">🧩 Modular Components</h4>
-                            <p class="text-sm text-gray-700">Break templates into composable functions and components</p>
+                            <p class="text-base text-gray-700">Break templates into composable functions and components</p>
                         </div>
 
                         <div class="bg-purple-50 rounded-lg p-6">
                             <h4 class="font-bold text-purple-600 mb-3">🔗 Prompt Chaining</h4>
-                            <p class="text-sm text-gray-700">Sequence of focused sub-tasks for complex workflows</p>
+                            <p class="text-base text-gray-700">Sequence of focused sub-tasks for complex workflows</p>
                         </div>
                     </div>
                 </div>
@@ -370,54 +467,54 @@
 
             <!-- Evaluation Metrics Table -->
             <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
-                <h3 class="text-2xl font-bold mb-6 text-prompt">Objective Evaluation Metrics</h3>
+                <h3 class="text-2xl font-bold mb-6" style="color: #4a5568;">Objective Evaluation Metrics</h3>
                 
                 <div class="table-container">
                     <table class="w-full bg-white">
                         <thead class="bg-gray-100">
                             <tr>
-                                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">Metric Category</th>
-                                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">Metric Name</th>
-                                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">Description</th>
-                                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">Use Case</th>
+                                <th class="px-6 py-4 text-left text-base font-semibold text-gray-900">Metric Category</th>
+                                <th class="px-6 py-4 text-left text-base font-semibold text-gray-900">Metric Name</th>
+                                <th class="px-6 py-4 text-left text-base font-semibold text-gray-900">Description</th>
+                                <th class="px-6 py-4 text-left text-base font-semibold text-gray-900">Use Case</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200">
                             <tr class="hover:bg-gray-50">
                                 <td class="px-6 py-4 font-medium text-blue-600">Reference-Based</td>
-                                <td class="px-6 py-4 font-mono text-sm">Semantic Similarity</td>
-                                <td class="px-6 py-4 text-sm text-gray-700">Cosine similarity between embeddings (0 to 1)</td>
-                                <td class="px-6 py-4 text-sm text-gray-700">Regression testing</td>
+                                <td class="px-6 py-4 font-mono text-base">Semantic Similarity</td>
+                                <td class="px-6 py-4 text-base text-gray-700">Cosine similarity between embeddings (0 to 1)</td>
+                                <td class="px-6 py-4 text-base text-gray-700">Regression testing</td>
                             </tr>
                             <tr class="hover:bg-gray-50">
                                 <td class="px-6 py-4 font-medium text-blue-600"></td>
-                                <td class="px-6 py-4 font-mono text-sm">BLEU/ROUGE</td>
-                                <td class="px-6 py-4 text-sm text-gray-700">N-gram overlap with reference text</td>
-                                <td class="px-6 py-4 text-sm text-gray-700">Summarization, translation</td>
+                                <td class="px-6 py-4 font-mono text-base">BLEU/ROUGE</td>
+                                <td class="px-6 py-4 text-base text-gray-700">N-gram overlap with reference text</td>
+                                <td class="px-6 py-4 text-base text-gray-700">Summarization, translation</td>
                             </tr>
                             <tr class="hover:bg-gray-50">
                                 <td class="px-6 py-4 font-medium text-green-600">LLM-as-Judge</td>
-                                <td class="px-6 py-4 font-mono text-sm">Faithfulness</td>
-                                <td class="px-6 py-4 text-sm text-gray-700">Factual consistency with context</td>
-                                <td class="px-6 py-4 text-sm text-gray-700">RAG systems, Q&A</td>
+                                <td class="px-6 py-4 font-mono text-base">Faithfulness</td>
+                                <td class="px-6 py-4 text-base text-gray-700">Factual consistency with context</td>
+                                <td class="px-6 py-4 text-base text-gray-700">RAG systems, Q&A</td>
                             </tr>
                             <tr class="hover:bg-gray-50">
                                 <td class="px-6 py-4 font-medium text-green-600"></td>
-                                <td class="px-6 py-4 font-mono text-sm">Relevance</td>
-                                <td class="px-6 py-4 text-sm text-gray-700">Alignment with user intent</td>
-                                <td class="px-6 py-4 text-sm text-gray-700">Chatbots, agents</td>
+                                <td class="px-6 py-4 font-mono text-base">Relevance</td>
+                                <td class="px-6 py-4 text-base text-gray-700">Alignment with user intent</td>
+                                <td class="px-6 py-4 text-base text-gray-700">Chatbots, agents</td>
                             </tr>
                             <tr class="hover:bg-gray-50">
                                 <td class="px-6 py-4 font-medium text-purple-600">Operational</td>
-                                <td class="px-6 py-4 font-mono text-sm">Latency</td>
-                                <td class="px-6 py-4 text-sm text-gray-700">Response time measurement</td>
-                                <td class="px-6 py-4 text-sm text-gray-700">Real-time applications</td>
+                                <td class="px-6 py-4 font-mono text-base">Latency</td>
+                                <td class="px-6 py-4 text-base text-gray-700">Response time measurement</td>
+                                <td class="px-6 py-4 text-base text-gray-700">Real-time applications</td>
                             </tr>
                             <tr class="hover:bg-gray-50">
                                 <td class="px-6 py-4 font-medium text-purple-600"></td>
-                                <td class="px-6 py-4 font-mono text-sm">Cost/Token Usage</td>
-                                <td class="px-6 py-4 text-sm text-gray-700">Input/output token consumption</td>
-                                <td class="px-6 py-4 text-sm text-gray-700">Budget optimization</td>
+                                <td class="px-6 py-4 font-mono text-base">Cost/Token Usage</td>
+                                <td class="px-6 py-4 text-base text-gray-700">Input/output token consumption</td>
+                                <td class="px-6 py-4 text-base text-gray-700">Budget optimization</td>
                             </tr>
                         </tbody>
                     </table>
@@ -426,7 +523,7 @@
 
             <!-- Regression Testing -->
             <div class="bg-white rounded-xl shadow-lg p-8">
-                <h3 class="text-2xl font-bold mb-6 text-production">Prompt Regression Testing Pipeline</h3>
+                <h3 class="text-2xl font-bold mb-6" style="color: #2f855a;">Prompt Regression Testing Pipeline</h3>
                 
                 <div class="grid md:grid-cols-2 gap-8">
                     <div>
@@ -434,19 +531,19 @@
                         <ol class="space-y-3">
                             <li class="phase-step">
                                 <strong>1. Build Versioned Test Suite</strong>
-                                <p class="text-sm text-gray-600 mt-1">Curated collection of real-world inputs including edge cases</p>
+                                <p class="text-base text-gray-600 mt-1">Curated collection of real-world inputs including edge cases</p>
                             </li>
                             <li class="phase-step">
                                 <strong>2. Define Golden Outputs</strong>
-                                <p class="text-sm text-gray-600 mt-1">Ground truth references and success rubrics</p>
+                                <p class="text-base text-gray-600 mt-1">Ground truth references and success rubrics</p>
                             </li>
                             <li class="phase-step">
                                 <strong>3. Automate in CI/CD</strong>
-                                <p class="text-sm text-gray-600 mt-1">Trigger tests on every prompt change proposal</p>
+                                <p class="text-base text-gray-600 mt-1">Trigger tests on every prompt change proposal</p>
                             </li>
                             <li class="phase-step">
                                 <strong>4. Set Pass/Fail Gates</strong>
-                                <p class="text-sm text-gray-600 mt-1">Threshold-based quality gates to prevent regressions</p>
+                                <p class="text-base text-gray-600 mt-1">Threshold-based quality gates to prevent regressions</p>
                             </li>
                         </ol>
                     </div>
@@ -456,15 +553,15 @@
                         <div class="space-y-4">
                             <div class="bg-blue-50 rounded-lg p-4">
                                 <h5 class="font-semibold text-blue-800">A/B Testing</h5>
-                                <p class="text-sm text-gray-700">Compare prompt versions in live production with real user traffic</p>
+                                <p class="text-base text-gray-700">Compare prompt versions in live production with real user traffic</p>
                             </div>
                             <div class="bg-green-50 rounded-lg p-4">
                                 <h5 class="font-semibold text-green-800">Multi-Model Benchmarking</h5>
-                                <p class="text-sm text-gray-700">Run same test suite across different LLMs for comparison</p>
+                                <p class="text-base text-gray-700">Run same test suite across different LLMs for comparison</p>
                             </div>
                             <div class="bg-purple-50 rounded-lg p-4">
                                 <h5 class="font-semibold text-purple-800">Production Observability</h5>
-                                <p class="text-sm text-gray-700">Monitor performance metrics and detect drift over time</p>
+                                <p class="text-base text-gray-700">Monitor performance metrics and detect drift over time</p>
                             </div>
                         </div>
                     </div>
@@ -486,42 +583,42 @@
                     <table class="w-full bg-white">
                         <thead class="bg-gray-100">
                             <tr>
-                                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">Feature</th>
-                                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">PromptLayer</th>
-                                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">Agenta</th>
-                                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900">Helicone</th>
+                                <th class="px-6 py-4 text-left text-base font-semibold text-gray-900">Feature</th>
+                                <th class="px-6 py-4 text-left text-base font-semibold text-gray-900">PromptLayer</th>
+                                <th class="px-6 py-4 text-left text-base font-semibold text-gray-900">Agenta</th>
+                                <th class="px-6 py-4 text-left text-base font-semibold text-gray-900">Helicone</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200">
                             <tr class="hover:bg-gray-50">
                                 <td class="px-6 py-4 font-medium text-gray-900">Primary Focus</td>
-                                <td class="px-6 py-4 text-sm">Prompt management & collaboration</td>
-                                <td class="px-6 py-4 text-sm">Integrated prompt engineering suite</td>
-                                <td class="px-6 py-4 text-sm">Production monitoring & debugging</td>
+                                <td class="px-6 py-4 text-base">Prompt management & collaboration</td>
+                                <td class="px-6 py-4 text-base">Integrated prompt engineering suite</td>
+                                <td class="px-6 py-4 text-base">Production monitoring & debugging</td>
                             </tr>
                             <tr class="hover:bg-gray-50">
                                 <td class="px-6 py-4 font-medium text-gray-900">Target User</td>
-                                <td class="px-6 py-4 text-sm">Mixed teams (technical + non-technical)</td>
-                                <td class="px-6 py-4 text-sm">Developers & AI teams</td>
-                                <td class="px-6 py-4 text-sm">Production-focused developers</td>
+                                <td class="px-6 py-4 text-base">Mixed teams (technical + non-technical)</td>
+                                <td class="px-6 py-4 text-base">Developers & AI teams</td>
+                                <td class="px-6 py-4 text-base">Production-focused developers</td>
                             </tr>
                             <tr class="hover:bg-gray-50">
                                 <td class="px-6 py-4 font-medium text-gray-900">Versioning</td>
-                                <td class="px-6 py-4 text-sm">Visual UI, release labels, A/B testing</td>
-                                <td class="px-6 py-4 text-sm">Design & refinement tools</td>
-                                <td class="px-6 py-4 text-sm">Automatic code-based versioning</td>
+                                <td class="px-6 py-4 text-base">Visual UI, release labels, A/B testing</td>
+                                <td class="px-6 py-4 text-base">Design & refinement tools</td>
+                                <td class="px-6 py-4 text-base">Automatic code-based versioning</td>
                             </tr>
                             <tr class="hover:bg-gray-50">
                                 <td class="px-6 py-4 font-medium text-gray-900">Evaluation</td>
-                                <td class="px-6 py-4 text-sm">Built-in batch evaluations</td>
-                                <td class="px-6 py-4 text-sm">Integrated quality assessment</td>
-                                <td class="px-6 py-4 text-sm">Historical data testing</td>
+                                <td class="px-6 py-4 text-base">Built-in batch evaluations</td>
+                                <td class="px-6 py-4 text-base">Integrated quality assessment</td>
+                                <td class="px-6 py-4 text-base">Historical data testing</td>
                             </tr>
                             <tr class="hover:bg-gray-50">
                                 <td class="px-6 py-4 font-medium text-gray-900">Pricing</td>
-                                <td class="px-6 py-4 text-sm">Freemium + Subscription</td>
-                                <td class="px-6 py-4 text-sm">Subscription-based</td>
-                                <td class="px-6 py-4 text-sm">Open-source + Paid tiers</td>
+                                <td class="px-6 py-4 text-base">Freemium + Subscription</td>
+                                <td class="px-6 py-4 text-base">Subscription-based</td>
+                                <td class="px-6 py-4 text-base">Open-source + Paid tiers</td>
                             </tr>
                         </tbody>
                     </table>
@@ -533,15 +630,15 @@
                 <div class="grid md:grid-cols-3 gap-6">
                     <div class="bg-white rounded-lg p-4">
                         <h4 class="font-semibold text-blue-600 mb-2">For Collaboration</h4>
-                        <p class="text-sm text-gray-700">Choose <strong>PromptLayer</strong> for cross-functional teams needing user-friendly interfaces</p>
+                        <p class="text-base text-gray-700">Choose <strong>PromptLayer</strong> for cross-functional teams needing user-friendly interfaces</p>
                     </div>
                     <div class="bg-white rounded-lg p-4">
                         <h4 class="font-semibold text-green-600 mb-2">For Comprehensive Suite</h4>
-                        <p class="text-sm text-gray-700">Choose <strong>Agenta</strong> for all-in-one open-source solution</p>
+                        <p class="text-base text-gray-700">Choose <strong>Agenta</strong> for all-in-one open-source solution</p>
                     </div>
                     <div class="bg-white rounded-lg p-4">
                         <h4 class="font-semibold text-purple-600 mb-2">For Production Focus</h4>
-                        <p class="text-sm text-gray-700">Choose <strong>Helicone</strong> for reliability and cost optimization</p>
+                        <p class="text-base text-gray-700">Choose <strong>Helicone</strong> for reliability and cost optimization</p>
                     </div>
                 </div>
             </div>
@@ -758,13 +855,13 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-gray-300 mt-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <footer class="mt-24 py-16" style="background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%); color: #e2e8f0;">
+        <div class="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
             <div class="text-center">
-                <p class="text-sm">
+                <p class="text-lg opacity-90 leading-relaxed">
                     This comprehensive guide provides a systematic approach to production-grade prompt management.
                     <br>
-                    Built with engineering discipline • Designed for reliability
+                    <em style="color: #cbd5e0;">Built with engineering discipline • Designed for reliability</em>
                 </p>
             </div>
         </div>
@@ -806,8 +903,12 @@
 
             navLinks.forEach(link => {
                 link.classList.remove('bg-blue-100', 'text-blue-600');
+                link.style.background = '';
+                link.style.color = '';
                 if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('bg-blue-100', 'text-blue-600');
+                    link.style.background = 'rgba(74, 85, 104, 0.12)';
+                    link.style.color = '#2d3748';
+                    link.style.fontWeight = '600';
                 }
             });
         });
