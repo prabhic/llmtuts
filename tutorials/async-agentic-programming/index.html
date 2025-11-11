@@ -424,13 +424,13 @@
         <!-- Executive Summary -->
         <div class="content-section">
             <p class="text-xl font-medium text-ink mb-6">
-                <strong>The landscape of AI-powered development environments has matured dramatically in 2024-2025, but true parallel multi-agent execution remains rare.</strong> Only Cursor 2.0 and Devin 2.0 currently support native parallel orchestration of multiple AI agents working simultaneously on codebases. Despite marketing claims, most "agentic IDEs" are sophisticated single-agent systems with enhanced context management. Where genuine parallelization exists, developers report 26-38% productivity gains and 6-7 hours saved weekly, though at <strong>15× higher token costs</strong> and with review capacity emerging as the critical bottleneck—not generation speed. The developer role is fundamentally transforming from writing code to orchestrating agents and validating outputs, with senior engineers proving particularly adept due to existing multitasking and delegation skills. While 14 distinct failure modes plague current systems, the technology shows clear value for research, refactoring, and parallelizable features, with optimal workflows using 3-8 agents coordinated through git worktrees or cloud sandboxes.
+                <strong>Picture this:</strong> It's 2024-2025, and the AI-powered development world is buzzing with promises of revolutionary multi-agent IDEs. But here's the twist—<strong>only two platforms actually deliver on that promise.</strong> While marketing materials scream about parallel AI agents, Cursor 2.0 and Devin 2.0 stand alone as the genuine article, enabling multiple agents to code simultaneously without stepping on each other's toes. The rest? Sophisticated single-agent systems dressed up in multi-agent clothing. For those wielding true parallelization, the rewards are real: 26-38% productivity gains, 6-7 hours saved weekly. But there's a catch—<strong>your token bill multiplies by 15×</strong>, and reviewing all that AI-generated code becomes the real bottleneck, not generation speed. The job itself transforms from fingers on keyboard to conductor of an AI orchestra, validating outputs and directing traffic. Senior engineers thrive here—they already know how to juggle parallel workflows and delegate effectively. Meanwhile, 14 distinct failure modes lurk in the shadows, waiting to trip up the unwary. Yet for research, refactoring, and truly parallelizable work, 3-8 well-coordinated agents can work magic through git worktrees or cloud sandboxes. Welcome to the new era of development.
             </p>
         </div>
 
         <!-- Section 1: Current State -->
         <div class="content-section">
-            <h2><span class="section-number">1</span>The current state reveals a gap between marketing and reality</h2>
+            <h2><span class="section-number">1</span>The illusion shatters: most "multi-agent" IDEs are clever imposters</h2>
             
             <p>The agentic IDE market exploded in 2024-2025 with tools claiming revolutionary multi-agent capabilities, yet rigorous analysis reveals <strong>only two platforms support true parallel multi-agent execution</strong>: Cursor 2.0 (launched October 2025) and Devin 2.0. Cursor enables up to <strong>8 coding agents running simultaneously</strong> through git worktrees or remote machines, each operating in isolated environments to prevent file conflicts. Its proprietary Composer model completes most tasks in under 30 seconds, achieving a 4× speed advantage over competitors. Devin 2.0 takes a different approach with cloud-based parallel orchestration where agents work in isolated sandboxes with full development environments.</p>
 
@@ -510,9 +510,9 @@
 
         <!-- Section 2: Technical Architecture -->
         <div class="content-section">
-            <h2><span class="section-number">2</span>Code-symbol granularity and distributed locking enable conflict-free parallel execution</h2>
+            <h2><span class="section-number">2</span>Behind the curtain: how agents dance without stepping on each other's toes</h2>
             
-            <p>The technical architecture enabling successful parallel multi-agent systems centers on <strong>preventing conflicts before they occur</strong> rather than resolving them afterward. The breakthrough came from AIDE's code-symbol-based approach, which achieved <strong>40.3% on SWE-Bench-Lite</strong> (state-of-the-art) by assigning each agent ownership of exactly one code symbol—a single class or function. Because agents work on non-overlapping scopes detected through tree-sitter parsing, conflicts become structurally impossible. This elegant solution eliminates the coordination overhead that plagues other approaches, though it limits parallelization to naturally decomposable codebases where 78% of required files exist in the same directory or one go-to-definition away.</p>
+            <p>Imagine a dance floor packed with performers, each choreographing their moves in real-time. How do you prevent them from colliding? The secret lies in <strong>preventing conflicts before they occur</strong> rather than breaking up fights afterward. AIDE cracked the code with an elegant insight: give each agent ownership of exactly <em>one</em> code symbol—a single class or function. By assigning non-overlapping territories detected through tree-sitter parsing, conflicts become structurally impossible. This breakthrough achieved <strong>40.3% on SWE-Bench-Lite</strong> (state-of-the-art), eliminating the coordination overhead that plagues other approaches. The catch? It works best for naturally decomposable codebases where 78% of required files sit in the same directory or one go-to-definition away.</p>
 
             <div class="success-box">
                 <h3 class="mt-0">Key Innovation: Code-Symbol Ownership</h3>
@@ -565,9 +565,9 @@
 
         <!-- Section 3: Developer Role Transformation -->
         <div class="content-section">
-            <h2><span class="section-number">3</span>Developers transition from coding to orchestration as the primary skill</h2>
+            <h2><span class="section-number">3</span>Your keyboard gathers dust: the shift from coder to conductor</h2>
             
-            <p>The transformation in developer roles represents one of the most profound shifts in software engineering practices. The job transitions from <strong>writing code line-by-line to directing multiple parallel workflows simultaneously</strong>, requiring fundamentally different cognitive patterns.</p>
+            <p>Remember when your value as a developer came from how fast you could type? Those days are ending. The most profound shift in software engineering isn't about tools—it's about <em>you</em>. Your job is transforming from <strong>writing code line-by-line to directing multiple parallel workflows simultaneously</strong>, like conducting an orchestra where every musician is an AI agent. It requires fundamentally different cognitive patterns: less syntax memorization, more strategic thinking.</p>
 
             <div class="highlight-box">
                 <h3 class="text-white mt-0">The New Developer Role</h3>
@@ -647,9 +647,9 @@
 
         <!-- Section 4: Use Cases -->
         <div class="content-section">
-            <h2><span class="section-number">4</span>Research and refactoring excel while coupled tasks require sequential execution</h2>
+            <h2><span class="section-number">4</span>When agents shine and when they stumble: picking your battles wisely</h2>
             
-            <p>Real-world usage patterns reveal <strong>dramatic disparities in parallelization value</strong> across task types.</p>
+            <p>Not all tasks were created equal in the age of parallel agents. Some problems practically beg for multi-agent parallelization, yielding <strong>dramatic performance leaps</strong>. Others? They're traps that will waste your time and tokens. The difference between success and frustration lies in knowing which is which.</p>
 
             <h3>✅ High-Value Parallel Tasks</h3>
             
@@ -705,9 +705,9 @@
 
         <!-- Section 5: Failure Modes -->
         <div class="content-section">
-            <h2><span class="section-number">5</span>Fourteen failure modes plague multi-agent systems across three fundamental categories</h2>
+            <h2><span class="section-number">5</span>The dark side: fourteen ways your agents will betray you</h2>
             
-            <p>UC Berkeley's 2025 MAST (Multi-Agent System Failure Taxonomy) study represents the first empirically grounded analysis of what actually goes wrong in production multi-agent systems. Analyzing 200+ execution traces across 7 popular frameworks with high inter-annotator agreement (Cohen's Kappa = 0.88), researchers identified <strong>14 distinct failure modes</strong> organized into three categories explaining why systems achieve only 33.33% correctness on straightforward programming tasks and 86.7% failure rates on cross-app test cases.</p>
+            <p>Every new technology has its shadow, and parallel multi-agent systems cast a particularly long one. UC Berkeley's 2025 MAST study pulled back the curtain on what <em>actually</em> goes wrong in production. After analyzing 200+ execution traces across 7 popular frameworks, researchers discovered something sobering: systems achieve only 33.33% correctness on straightforward programming tasks, with 86.7% failure rates on cross-app test cases. The culprits? <strong>Fourteen distinct failure modes</strong> organized into three categories, each one a potential landmine in your workflow.</p>
 
             <h3>Category 1: Specification Issues (41.77% of failures)</h3>
             <ul>
@@ -776,9 +776,9 @@
 
         <!-- Section 6: Economics -->
         <div class="content-section">
-            <h2><span class="section-number">6</span>Token costs multiply by 15× but productivity gains justify investment for high-value development</h2>
+            <h2><span class="section-number">6</span>The price of speed: why your token bill will make you wince</h2>
             
-            <p>The economics of parallel multi-agent systems reveal <strong>substantial cost premiums</strong> that fundamentally constrain adoption to high-value use cases.</p>
+            <p>Let's talk about money. When you unleash parallel agents on your codebase, productivity soars—but so do costs. Anthropic's production data reveals a harsh truth: multi-agent systems devour <strong>15× more tokens than simple chat</strong>. That elegant feature you built in an afternoon? It might've cost $15 instead of $1. Suddenly, the economics fundamentally constrain which problems justify the parallel approach.</p>
 
             <h3>Token Cost Reality</h3>
             <p>Anthropic's production data demonstrates multi-agent systems consume <strong>15× more tokens than chat interactions</strong>, while single agents use 4×. With GPT-4o at $2.50/$10.00 per million input/output tokens and Claude Opus at $15/$75, a simple chat task costing $1 balloons to $15 with multi-agent parallelization.</p>
@@ -884,9 +884,9 @@
 
         <!-- Section 7: Future Outlook -->
         <div class="content-section">
-            <h2><span class="section-number">7</span>The transformation from assistants to autonomous orchestrators will accelerate dramatically through 2027</h2>
+            <h2><span class="section-number">7</span>The road ahead: from assistants to autonomous orchestrators by 2027</h2>
             
-            <p>Market projections converge on <strong>33% of enterprise applications including agentic AI by 2028</strong>, up from less than 1% in 2024 according to Gartner. Deloitte predicts 25% of GenAI-using enterprises will deploy agents by 2025, reaching 50% by 2027. Capgemini reports 82% of organizations plan agent integration by 2026.</p>
+            <p>Fast forward to 2027. What does the landscape look like? Every major analyst firm sees the same future, and it's coming fast. Gartner predicts <strong>33% of enterprise applications will include agentic AI by 2028</strong>—up from less than 1% today. Deloitte sees 25% of GenAI enterprises deploying agents by 2025, hitting 50% by 2027. Capgemini reports 82% of organizations are already planning integration by 2026. The writing isn't just on the wall—it's written in code that agents are generating right now.</p>
 
             <div class="stats-grid">
                 <div class="stat-card">
