@@ -1,15 +1,15 @@
 # Async Agentic Programming
 
-A comprehensive guide to parallel multi-agent agentic IDEs and how they reshape software development, covering the current state, technical architecture, developer role transformation, and future outlook.
+A story-driven guide to parallel multi-agent agentic IDEs and how they reshape software development. Journey from illusion to reality, exploring the technical magic, role transformations, wins and pitfalls, costs, and what's coming next.
 
-## Contents
-- Current state of agentic IDEs (Cursor 2.0, Devin 2.0, Windsurf, etc.)
-- Technical architecture: code-symbol granularity and distributed locking
-- Developer role transformation from coding to orchestration
-- Use cases: research, refactoring, and when parallelization works
-- 14 failure modes from UC Berkeley's MAST study
-- Token economics: 15× costs vs productivity gains
-- Future trends through 2027
+## The Story Arc
+1. **The illusion shatters** - Most "multi-agent" IDEs are clever imposters
+2. **Behind the curtain** - How agents dance without stepping on each other's toes  
+3. **Your keyboard gathers dust** - The shift from coder to conductor
+4. **When agents shine and stumble** - Picking your battles wisely
+5. **The dark side** - Fourteen ways your agents will betray you
+6. **The price of speed** - Why your token bill will make you wince
+7. **The road ahead** - From assistants to autonomous orchestrators by 2027
 
 ## Key Statistics
 - Only 2 platforms support true parallel multi-agent execution
