@@ -13,9 +13,11 @@ I think keeping complete html pages as one tutorial will give lot of freedom.  M
 
 - **Tutorials** - Structured guides from my AI learning sessions
 - **Diagrams** - Visual explanations of complex concepts
+ - **Principles Reference** - Reusable checklist and templates for writing new articles (`tutorials/principles/index.md`)
 
 ## Latest Learnings
 
+- [Article Writing Principles (Reference)](tutorials/principles/index.md) - Concise checklist for drafting
 - [HTML Tags: Code to Reality](tutorials/html-tags/index.html) - HTML elements and visual layouts
 - [Model Context Protocol](tutorials/model-context/index.html) - LLM interaction patterns
 
