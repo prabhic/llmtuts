@@ -1,0 +1,100 @@
+---
+title: "The Witness and The Machine: Turing's 1936 Proof and the Nature of Consciousness"
+subtitle: "How the limits of computation reveal something fundamental about awareness"
+author: "Prabhanjan Kumar"
+date: "2026-01-23"
+last_updated: "2026-01-23"
+status: "Early Exploration"
+version: "1.0"
+
+# Classification
+category: "Philosophy of AI"
+tags:
+  - Turing
+  - Halting Problem
+  - Consciousness
+  - Vedanta
+  - AI Limitations
+  - Observer Effect
+  - Computational Theory
+  - Drashta-Drishya
+  - AI Agents
+  - Self-Validation
+
+# Audience
+target_audience:
+  - AI Engineers
+  - System Architects
+  - Product Managers
+  - Philosophers
+  - Computer Scientists
+  
+difficulty: "Intermediate to Advanced"
+reading_time: "20 minutes (full read)"
+
+# Content Structure
+sections:
+  - "The Mathematical Foundation: The Halting Problem"
+  - "The Vedantic Framework: Drashta and Drishya"
+  - "The Synthesis: Computation Requires a Witness"
+  - "The Modern Implication: AI Agents and the Observer"
+  - "Research from Leading AI Companies"
+  - "The Shift in Human Role"
+  - "Open Questions"
+
+# Key Concepts
+key_concepts:
+  - "Halting Problem"
+  - "Drashta (The Seer)"
+  - "Drishya (The Seen)"
+  - "Self-validation limits"
+  - "Observer transcendence"
+  - "Computational witness"
+  - "Agent oversight"
+
+# Related Research
+research_references:
+  - "Turing, A. M. (1936). On Computable Numbers"
+  - "Limitations of LLMs Can Be Overcome by Carefully Designed Multi-Agent Collaboration (2025)"
+  - "DeepMind World Model Research (2026)"
+  - "Anthropic Scalable Oversight Research"
+  - "Vedantic Philosophy - Advaita Vedanta"
+
+# AI Companies Mentioned
+ai_companies:
+  - OpenAI
+  - DeepMind / Google
+  - Anthropic
+
+# Related Topics
+related_topics:
+  - "Gödel's Incompleteness Theorems"
+  - "Quantum Observer Effect"
+  - "Hard Problem of Consciousness"
+  - "System-2 Reasoning in AI"
+  - "Synthetic Data Limitations"
+
+# Article Characteristics
+writing_style: "Honest Explorer"
+tone: "Peer-to-peer, conversational"
+approach: "Synthesis of mathematics, philosophy, and modern AI research"
+perspective: "Architect turned founder exploring emerging technology"
+
+# Practical Applications
+practical_implications:
+  - "AI agent system design"
+  - "External validation architecture"
+  - "Human-in-the-loop patterns"
+  - "System monitoring design"
+  - "Grounding mechanisms"
+
+# Open Questions
+has_open_questions: true
+maturity_level: "Early exploration, actively evolving"
+
+# Links
+repository: "https://github.com/prabhic/llmtuts"
+article_path: "tutorials/turing-consciousness-witness/index.md"
+
+# Citation
+citation_format: "Kumar, P. (2026). The Witness and The Machine: Turing's 1936 Proof and the Nature of Consciousness."

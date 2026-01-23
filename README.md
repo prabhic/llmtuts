@@ -17,6 +17,7 @@ I think keeping complete html pages as one tutorial will give lot of freedom.  M
 
 ## Latest Learnings
 
+- [The Witness and The Machine](tutorials/turing-consciousness-witness/index.md) - Turing's 1936 proof, consciousness, and AI limitations
 - [Article Writing Principles (Reference)](tutorials/principles/index.md) - Concise checklist for drafting
 - [HTML Tags: Code to Reality](tutorials/html-tags/index.html) - HTML elements and visual layouts
 - [Model Context Protocol](tutorials/model-context/index.html) - LLM interaction patterns
